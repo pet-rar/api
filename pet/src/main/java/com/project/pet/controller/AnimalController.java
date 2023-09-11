@@ -21,23 +21,23 @@ public class AnimalController {
 	@Autowired
 	private AnimalService AnimalService;
 
-	@PostMapping("/Animal")
+	@PostMapping("/animal")
 	public Animal saveAnimal(@Valid @RequestBody Animal Animal) {
 
 		return AnimalService.saveAnimal(Animal);
 	}
 
-	@GetMapping("/Animal")
+	@GetMapping("/animal")
 	public List<Animal> listAnimal() {
 		return AnimalService.fetchAnimalList();
 	}
 
-	@PostMapping("/AnimalUpdate")
+	@PostMapping("/animalUpdate")
 	public Animal updateAnimal(Animal Animal) {
 		return AnimalService.updateAnimal(Animal);
 	}
 
-	@DeleteMapping("/Animal/{id}")
+	@DeleteMapping("/animal/{id}")
 	public String deleteDepartmentById(@PathVariable("id") Long Id) {
 		AnimalService.deleteAnimalById(Id);
 		return "Deleted Successfully";

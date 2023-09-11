@@ -21,23 +21,23 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService UsuarioService;
 
-	@PostMapping("/Usuario")
+	@PostMapping("/usuario")
 	public Usuario saveUsuario(@Valid @RequestBody Usuario Usuario) {
 
 		return UsuarioService.saveUsuario(Usuario);
 	}
 
-	@GetMapping("/Usuario")
+	@GetMapping("/usuario")
 	public List<Usuario> listUsuario() {
 		return UsuarioService.fetchUsuarioList();
 	}
 
-	@PostMapping("/UsuarioUpdate")
+	@PostMapping("/usuarioUpdate")
 	public Usuario updateUsuario(Usuario Usuario) {
 		return UsuarioService.updateUsuario(Usuario);
 	}
 
-	@DeleteMapping("/Usuario/{id}")
+	@DeleteMapping("/usuario/{id}")
 	public String deleteDepartmentById(@PathVariable("id") Long Id) {
 		UsuarioService.deleteUsuarioById(Id);
 		return "Deleted Successfully";
