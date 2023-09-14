@@ -1,0 +1,40 @@
+services:
+  pet-db:
+    container_name: pet-db
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "petrar"
+    ports:
+      - "3307:3306"
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    volumes:
+      - pet_db:/var/lib/mysql
+    networks:
+      - pet-network
+
+  pet-api:
+    container_name: pet-api
+    image: pet-api-img
+    build: .
+    depends_on:
+      pet-db:
+        condition: service_healthy
+    restart: always
+    ports:
+      - "8090:8090"
+    volumes:
+      - pet_api:/app
+    networks:
+      - pet-network
+
+volumes:
+  pet_api:
+  pet_db:
+
+networks:
+  pet-network:
