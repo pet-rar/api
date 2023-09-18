@@ -36,8 +36,9 @@ public class Animal {
 	 @Column(length = 255)
 	 private String raça;
 	 
-	 @Column(columnDefinition = "ENUM('Feminino', 'Masculino')")
-	 private String tipo;
+	 @Column(columnDefinition = "tipo")
+	 @Enumerated(EnumType.STRING)
+	 private AnimalTipo tipo;
 	 
 	 @Column(length = 100)
 	 private String porte;
@@ -99,11 +100,11 @@ public class Animal {
 		this.raça = raça;
 	}
 
-	public String getTipo() {
+	public AnimalTipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(AnimalTipo tipo) {
 		this.tipo = tipo;
 	}
 
