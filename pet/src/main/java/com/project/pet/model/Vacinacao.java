@@ -31,8 +31,9 @@ public class Vacinacao {
 									// relacionamento
 	private Animal animal;
 
-	@Column(columnDefinition = "ENUM('aplicado', 'pendente')")
-	private String status;
+	@Column(columnDefinition = "status")
+	@Enumerated(EnumType.STRING)
+	private VaccinationStatus status;
 
 	public Integer getId() {
 		return id;
@@ -66,11 +67,11 @@ public class Vacinacao {
 		this.animal = animal;
 	}
 
-	public String getStatus() {
+	public VaccinationStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(VaccinationStatus status) {
 		this.status = status;
 	}
 
