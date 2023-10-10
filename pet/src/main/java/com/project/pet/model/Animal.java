@@ -4,6 +4,8 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +38,7 @@ public class Animal {
 	 @Column(length = 255)
 	 private String raça;
 	 
-	 @Column(columnDefinition = "tipo")
+	 @Column(columnDefinition = "ENUM('Feminino', 'Masculino')")
 	 @Enumerated(EnumType.STRING)
 	 private AnimalTipo tipo;
 	 

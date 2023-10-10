@@ -1,4 +1,4 @@
 package com.project.pet.dto;
 
-public record AuthenticationDTO(String nome, String senha) {
+public record AuthenticationDTO(String email, String senha) {
 }

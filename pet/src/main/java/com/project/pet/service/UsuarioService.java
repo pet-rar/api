@@ -6,7 +6,7 @@ import com.project.pet.model.Usuario;
 
 public interface UsuarioService {
 
-	// Save operation
+	  // Save operation
 		Usuario saveUsuario(Usuario usuario);
 	 
 	    // Read operation
@@ -17,6 +17,8 @@ public interface UsuarioService {
 	 
 	    // Delete operation
 	    void deleteUsuarioById(Long Id);
+	    
+	    Usuario findById(Long Id);
 	    
 
 }
