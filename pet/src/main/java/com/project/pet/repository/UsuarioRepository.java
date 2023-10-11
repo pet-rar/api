@@ -13,7 +13,7 @@ import com.project.pet.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	UserDetails findByemail(String username);
+	UserDetails findByemail(String email);
 	
 	@Query(value = "SELECT new com.project.pet.dto.UsuarioDTO(u.id, u.cpf, u.nome, u.email, u.tipo) FROM Usuario u")
 	List<UsuarioFindAllDTO> findAllDTO();
