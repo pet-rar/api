@@ -26,6 +26,7 @@ public class Usuario implements UserDetails {
 
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.AUTO)
+	    @Column(name = "id_usuario")
 	    private Integer idUsuario;
 
 	    @Column(length = 255)
@@ -34,10 +35,10 @@ public class Usuario implements UserDetails {
 	    @Column(length = 300)
 	    private String senha;
 
-	    @Column
+	    @Column(name = "data_nascimento")
 	    private Date dataNascimento;
 
-	    @Column(name = "tipo")
+	    @Column()
 	    @Enumerated(EnumType.STRING)
 	    private UserTipo tipo;
 
@@ -60,9 +61,9 @@ public class Usuario implements UserDetails {
 			super();
 		}
 	    
-		public Usuario(String nome, String senha, UserTipo tipo) {
+		public Usuario(String email, String senha, UserTipo tipo) {
 			super();
-			this.nome = nome;
+			this.email = email;
 			this.senha = senha;
 			this.tipo = tipo;
 		}
