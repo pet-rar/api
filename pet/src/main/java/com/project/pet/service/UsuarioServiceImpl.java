@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.model.Usuario;
 import com.project.pet.repository.UsuarioRepository;
 
@@ -24,9 +25,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public List<Usuario> fetchUsuarioList() {
+	public List<UsuarioFindAllDTO> fetchUsuarioList() {
 		
-		return usuarioRepository.findAll();
+		
+		return usuarioRepository.findAllDTO();
 	}
 
 	@Override

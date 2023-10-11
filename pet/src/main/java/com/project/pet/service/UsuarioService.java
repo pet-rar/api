@@ -2,6 +2,7 @@ package com.project.pet.service;
 
 import java.util.List;
 
+import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.model.Usuario;
 
 public interface UsuarioService {
@@ -10,7 +11,7 @@ public interface UsuarioService {
 		Usuario saveUsuario(Usuario usuario);
 	 
 	    // Read operation
-	    List<Usuario> fetchUsuarioList();
+	    List<UsuarioFindAllDTO> fetchUsuarioList();
 	 
 	    // Update operation
 	    Usuario updateUsuario(Usuario usuario);

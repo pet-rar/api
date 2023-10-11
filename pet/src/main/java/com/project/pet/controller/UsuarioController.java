@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.model.Usuario;
 import com.project.pet.service.UsuarioService;
 
@@ -28,7 +29,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/usuario")
-	public List<Usuario> listUsuario() {
+	public List<UsuarioFindAllDTO> listUsuario() {
 		return UsuarioService.fetchUsuarioList();
 	}
 

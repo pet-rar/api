@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.model.Usuario;
 
 @Repository
@@ -14,8 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	UserDetails findByemail(String username);
 	
-	@Query(value = "SELECT id,cpf,nome,email,tipo from usuario", nativeQuery = true)
-	List<Usuario> findAll();
+	@Query(value = "SELECT new com.project.pet.dto.UsuarioDTO(u.id, u.cpf, u.nome, u.email, u.tipo) FROM Usuario u")
+	List<UsuarioFindAllDTO> findAllDTO();
 	
 	@Query(value = "SELECT eu.id_usuario,u.cpf,u.nome,u.email,u.tipo,e.bairro,e.cidade,"
 			+ "e.estado,e.logradouro"
