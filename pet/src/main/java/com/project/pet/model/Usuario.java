@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.project.pet.dto.Usuario.UsuarioDTO;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,11 +25,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Usuario implements UserDetails {
-
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    @Column(name = "id_usuario")
-	    private Integer idUsuario;
+	    @Column(name = "id")
+	    private Integer id;
 
 	    @Column(length = 255)
 	    private String nome;
@@ -42,42 +43,52 @@ public class Usuario implements UserDetails {
 	    @Enumerated(EnumType.STRING)
 	    private UserTipo tipo;
 
-	    @Column(length = 14)
+	    @Column(length = 15)
 	    private String telefone;
 
-	    @Column(length = 11)
+	    @Column(length = 14)
 	    private String cpf;
 
-	    // Usando @OneToOne para representar o relacionamento com Endereco
 	    @OneToOne(cascade = CascadeType.ALL) 
-	    @JoinColumn(name = "idEndereco")
+	    @JoinColumn(name = "id_endereco")
 	    private Endereco endereco;
 
 	    @Column(length = 255)
 	    private String email;
-
-
-	    public Usuario() {
-			super();
-		}
 	    
-		public Usuario(String email, String senha, UserTipo tipo) {
+	    public Usuario() {
+	    	super();
+	    }
+	    
+	    public Usuario(String email, String senha, UserTipo tipo) {
 			super();
 			this.email = email;
 			this.senha = senha;
 			this.tipo = tipo;
 		}
+	    
+		public Usuario(UsuarioDTO usuarioDTO) {
+			super();
+			this.nome = usuarioDTO.nome();
+			this.senha = usuarioDTO.senha();
+			this.dataNascimento = usuarioDTO.dataNascimento();
+			this.tipo = usuarioDTO.tipo();
+			this.telefone = usuarioDTO.telefone();
+			this.cpf = usuarioDTO.cpf();
+			this.email = usuarioDTO.email();
+		}
+		
 		@Override
 	    public Collection<? extends GrantedAuthority> getAuthorities() {
 	        if(this.tipo == UserTipo.FUNCIONARIO) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
 	        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	    }
 		public Integer getIdUsuario() {
-			return idUsuario;
+			return id;
 		}
 
-		public void setIdUsuario(Integer idUsuario) {
-			this.idUsuario = idUsuario;
+		public void setIdUsuario(Integer id) {
+			this.id = id;
 		}
 
 		public String getNome() {
@@ -146,38 +157,31 @@ public class Usuario implements UserDetails {
 
 		@Override
 		public String getPassword() {
-
 			return this.senha;
 		}
 
 		@Override
 		public String getUsername() {
-
 			return this.nome;
 		}
+		
 		@Override
 		public boolean isAccountNonExpired() {
-
 			return true;
 		}
 
 		@Override
 		public boolean isAccountNonLocked() {
-
 			return true;
 		}
 
 		@Override
 		public boolean isCredentialsNonExpired() {
-
 			return true;
 		}
 
 		@Override
 		public boolean isEnabled() {
-
 			return true;
-		}
-	 
-	    
+		}	    
 }
