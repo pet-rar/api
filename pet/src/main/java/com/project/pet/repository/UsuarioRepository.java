@@ -15,8 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	UserDetails findByemail(String email);
 	
-	@Query(value = "SELECT new com.project.pet.dto.UsuarioDTO(u.id, u.cpf, u.nome, u.email, u.tipo) FROM Usuario u")
-	List<UsuarioFindAllDTO> findAllDTO();
+	@Query(value = "SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.cpf, u.nome, u.email, u.tipo) FROM Usuario u")
+	List<UsuarioFindAllDTO> findAllUsuarios();
 	
 	@Query(value = "SELECT eu.id_usuario,u.cpf,u.nome,u.email,u.tipo,e.bairro,e.cidade,"
 			+ "e.estado,e.logradouro"

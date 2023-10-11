@@ -28,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<UsuarioFindAllDTO> fetchUsuarioList() {
 		
 		
-		return usuarioRepository.findAllDTO();
+		return usuarioRepository.findAllUsuarios();
 	}
 
 	@Override
