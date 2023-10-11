@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,19 +15,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
+import com.project.pet.dto.Usuario.UsuarioSaveDTO;
 import com.project.pet.model.Usuario;
 import com.project.pet.service.UsuarioService;
 
 @RestController
 public class UsuarioController {
-
 	@Autowired
 	private UsuarioService UsuarioService;
 
-	@PostMapping("/usuario")
-	public Usuario saveUsuario(@Valid @RequestBody Usuario Usuario) {
-
-		return UsuarioService.saveUsuario(Usuario);
+	@PostMapping("/usuario/register")
+	public ResponseEntity saveUsuario(@Valid @RequestBody UsuarioSaveDTO Usuario) {
+		UsuarioService.saveUsuario(Usuario);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping("/usuario")
@@ -43,5 +46,4 @@ public class UsuarioController {
 		UsuarioService.deleteUsuarioById(Id);
 		return "Deleted Successfully";
 	}
-
 }
