@@ -1,7 +1,7 @@
 package com.project.pet.model;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -37,7 +37,7 @@ public class Usuario implements UserDetails {
 	    private String senha;
 
 	    @Column(name = "data_nascimento")
-	    private Date dataNascimento;
+	    private LocalDate dataNascimento;
 
 	    @Column()
 	    @Enumerated(EnumType.STRING)
@@ -107,11 +107,11 @@ public class Usuario implements UserDetails {
 			this.senha = senha;
 		}
 
-		public Date getDataNascimento() {
+		public LocalDate getDataNascimento() {
 			return dataNascimento;
 		}
 
-		public void setDataNascimento(Date dataNascimento) {
+		public void setDataNascimento(LocalDate dataNascimento) {
 			this.dataNascimento = dataNascimento;
 		}
 
