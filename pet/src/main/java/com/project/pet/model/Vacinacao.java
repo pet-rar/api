@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +33,7 @@ public class Vacinacao {
 									// relacionamento
 	private Animal animal;
 
-	@Column(columnDefinition = "status")
+	@Column(columnDefinition = "ENUM('aplicado', 'pendente')")
 	@Enumerated(EnumType.STRING)
 	private VaccinationStatus status;
 
