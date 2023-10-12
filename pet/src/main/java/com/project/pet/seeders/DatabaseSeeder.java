@@ -27,9 +27,9 @@ public class DatabaseSeeder implements CommandLineRunner {
 	private void seedUsuarios() {
 		if (usuarioRepository.count() == 0) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate dataNascimento = LocalDate.parse("2012-04-23", formatter);			
+			LocalDate dataNascimento = LocalDate.parse("2000-01-01", formatter);
 			
-			UsuarioDTO usuarioDTO = new UsuarioDTO("Admin", "999.999.999-99", dataNascimento, "(99) 99999-9999", UserTipo.FUNCIONARIO, "teste@email.com", "Admin@123");
+			UsuarioDTO usuarioDTO = new UsuarioDTO("Admin", "999.999.999-99", dataNascimento, "(99) 99999-9999", UserTipo.FUNCIONARIO, "admin@email.com", "Admin@123");
             Usuario usuarioSeed = new Usuario(usuarioDTO);
             usuarioSeed.setSenha(new BCryptPasswordEncoder().encode(usuarioDTO.senha()));
             
