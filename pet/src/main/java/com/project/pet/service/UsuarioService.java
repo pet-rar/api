@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
+import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
 
 public interface UsuarioService {
@@ -18,7 +19,7 @@ public interface UsuarioService {
 	UsuarioDTO fetchUsuario(long id);
 	 
 	// Update operation
-	Usuario updateUsuario(Usuario usuario);
+	Usuario updateUsuario(UsuarioUpdateDTO usuario);
 	 
 	// Delete operation
 	void deleteUsuarioById(Long Id);

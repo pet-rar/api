@@ -1,5 +1,6 @@
 package com.project.pet.model;
 
+import com.project.pet.dto.Endereco.EnderecoDTO;
 import com.project.pet.dto.Endereco.EnderecoSaveDTO;
 
 import jakarta.persistence.Column;
@@ -36,6 +37,15 @@ public class Endereco {
 		this.bairro = bairro;
 		this.estado = estado;
 		this.cep = cep;
+	}
+	
+	public Endereco(EnderecoDTO endereco) {
+		this.idEndereco = endereco.idEndereco();
+		this.logradouro = endereco.logradouro();
+		this.cidade = endereco.cidade();
+		this.bairro = endereco.bairro();
+		this.estado = endereco.estado();
+		this.cep = endereco.cep();
 	}
 	 
 	public Integer getIdEndereco() {

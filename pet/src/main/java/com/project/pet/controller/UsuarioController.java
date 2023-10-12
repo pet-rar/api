@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
+import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
 import com.project.pet.service.UsuarioService;
 
@@ -42,8 +43,8 @@ public class UsuarioController {
 		return UsuarioService.fetchUsuario(id);
 	}
 
-	@PostMapping("/usuarioUpdate")
-	public Usuario updateUsuario(Usuario Usuario) {
+	@PostMapping("/usuario/update")
+	public Usuario updateUsuario(@Valid @RequestBody UsuarioUpdateDTO Usuario) {
 		return UsuarioService.updateUsuario(Usuario);
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
+import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Endereco;
 import com.project.pet.model.Usuario;
 import com.project.pet.repository.EnderecoRepository;
@@ -50,8 +51,25 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public Usuario updateUsuario(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+	public Usuario updateUsuario(UsuarioUpdateDTO usuario) {
+		var endereco = new Endereco(usuario.endereco());
+		
+		var enderecoEntity = enderecoRepository.save(endereco);
+		
+		Usuario usuarioEntity = new Usuario(usuario.usuario());
+		usuarioEntity.setEndereco(enderecoEntity);
+		
+		if (usuario.usuario().senha() != null) {
+			usuarioEntity.setSenha(new BCryptPasswordEncoder().encode(usuario.usuario().senha()));
+		} else {
+	        Usuario existingUsuario = usuarioRepository.findById((long) usuarioEntity.getIdUsuario()).orElse(null);
+	        
+	        if (existingUsuario != null) {
+	            usuarioEntity.setSenha(existingUsuario.getSenha());
+	        }
+		}
+		
+		return usuarioRepository.save(usuarioEntity);
 	}
 
 	@Override
