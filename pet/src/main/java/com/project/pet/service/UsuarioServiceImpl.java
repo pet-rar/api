@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
-import com.project.pet.dto.Usuario.UsuarioSaveDTO;
+import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.model.Endereco;
 import com.project.pet.model.Usuario;
 import com.project.pet.repository.EnderecoRepository;
@@ -24,7 +24,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	private EnderecoRepository enderecoRepository;
 	
 	@Override
-	public Usuario saveUsuario(UsuarioSaveDTO usuario) {
+	public Usuario saveUsuario(UsuarioRegisterDTO usuario) {
 		var endereco = Endereco.convertToEntity(usuario.endereco());
 		
 		var enderecoEntity = enderecoRepository.save(endereco);

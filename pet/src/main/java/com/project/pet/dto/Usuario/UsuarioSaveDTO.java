@@ -1,6 +1,8 @@
 package com.project.pet.dto.Usuario;
 
-import com.project.pet.dto.Endereco.EnderecoSaveDTO;
+import java.time.LocalDate;
 
-public record UsuarioSaveDTO(UsuarioDTO usuario, EnderecoSaveDTO endereco) {
+import com.project.pet.model.UserTipo;
+
+public record UsuarioSaveDTO(String nome, String cpf, LocalDate dataNascimento, String telefone, UserTipo tipo, String email, String senha) {
 }

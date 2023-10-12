@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
-import com.project.pet.dto.Usuario.UsuarioSaveDTO;
+import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.model.Usuario;
 import com.project.pet.service.UsuarioService;
 
@@ -25,7 +25,7 @@ public class UsuarioController {
 	private UsuarioService UsuarioService;
 
 	@PostMapping("/usuario/register")
-	public ResponseEntity saveUsuario(@Valid @RequestBody UsuarioSaveDTO Usuario) {
+	public ResponseEntity saveUsuario(@Valid @RequestBody UsuarioRegisterDTO Usuario) {
 		UsuarioService.saveUsuario(Usuario);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).build();

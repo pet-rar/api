@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.project.pet.dto.Usuario.UsuarioDTO;
+import com.project.pet.dto.Usuario.UsuarioSaveDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -67,15 +67,15 @@ public class Usuario implements UserDetails {
 			this.tipo = tipo;
 		}
 	    
-		public Usuario(UsuarioDTO usuarioDTO) {
+		public Usuario(UsuarioSaveDTO usuarioSaveDTO) {
 			super();
-			this.nome = usuarioDTO.nome();
-			this.senha = usuarioDTO.senha();
-			this.dataNascimento = usuarioDTO.dataNascimento();
-			this.tipo = usuarioDTO.tipo();
-			this.telefone = usuarioDTO.telefone();
-			this.cpf = usuarioDTO.cpf();
-			this.email = usuarioDTO.email();
+			this.nome = usuarioSaveDTO.nome();
+			this.senha = usuarioSaveDTO.senha();
+			this.dataNascimento = usuarioSaveDTO.dataNascimento();
+			this.tipo = usuarioSaveDTO.tipo();
+			this.telefone = usuarioSaveDTO.telefone();
+			this.cpf = usuarioSaveDTO.cpf();
+			this.email = usuarioSaveDTO.email();
 		}
 		
 		@Override
