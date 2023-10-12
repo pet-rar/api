@@ -49,7 +49,7 @@ public class Usuario implements UserDetails {
 	    @Column(length = 14)
 	    private String cpf;
 
-	    @OneToOne(cascade = CascadeType.ALL) 
+	    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) 
 	    @JoinColumn(name = "id_endereco")
 	    private Endereco endereco;
 
