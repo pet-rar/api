@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.model.Usuario;
@@ -34,6 +35,11 @@ public class UsuarioController {
 	@GetMapping("/usuario")
 	public List<UsuarioFindAllDTO> listUsuario() {
 		return UsuarioService.fetchUsuarioList();
+	}
+	
+	@GetMapping("/usuario/{id}")
+	public UsuarioDTO findUsuario(@PathVariable("id") Long id) {
+		return UsuarioService.fetchUsuario(id);
 	}
 
 	@PostMapping("/usuarioUpdate")

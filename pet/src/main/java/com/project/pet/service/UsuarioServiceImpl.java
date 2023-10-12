@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.model.Endereco;
@@ -15,6 +16,7 @@ import com.project.pet.repository.EnderecoRepository;
 import com.project.pet.repository.UsuarioRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.TypedQuery;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -40,6 +42,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public List<UsuarioFindAllDTO> fetchUsuarioList() {		
 		return usuarioRepository.findAllUsuarios();
+	}
+	
+	@Override
+	public UsuarioDTO fetchUsuario(long id) {		
+		return usuarioRepository.findUsuario(id);
 	}
 
 	@Override
