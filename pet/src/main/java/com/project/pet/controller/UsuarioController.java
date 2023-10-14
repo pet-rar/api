@@ -42,6 +42,11 @@ public class UsuarioController {
 	public UsuarioDTO findUsuario(@PathVariable("id") Long id) {
 		return UsuarioService.fetchUsuario(id);
 	}
+	
+	@GetMapping("/usuario/{cpf}")
+	public UsuarioDTO findUsuarioByCPF(@PathVariable("cpf") String cpf) {
+		return UsuarioService.findCPF(cpf);
+	}
 
 	@PostMapping("/usuario/update")
 	public Usuario updateUsuario(@Valid @RequestBody UsuarioUpdateDTO Usuario) {
