@@ -21,7 +21,7 @@ import jakarta.persistence.TypedQuery;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
-	@Autowired
+		@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
@@ -46,8 +46,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
-	public UsuarioDTO fetchUsuario(long id) {		
-		return usuarioRepository.findUsuario(id);
+	public UsuarioDTO fetchUsuario(long id) {	
+		 UsuarioDTO usuario = usuarioRepository.findUsuario(id);
+		 
+		 if(usuario == null) {
+			  throw new EntityNotFoundException("Usuario with ID " + id + " not found");
+		 }
+		 
+		return usuario;
 	}
 
 	@Override
@@ -77,13 +83,15 @@ public class UsuarioServiceImpl implements UsuarioService{
 		usuarioRepository.deleteById(Id);		
 	}
 
+
 	@Override
-	public Usuario findById(Long id) {
-	    Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
-	    if (usuarioOptional.isPresent()) {
-	        return usuarioOptional.get(); // Return the Usuario if it exists
-	    } else {
-	        throw new EntityNotFoundException("Usuario with ID " + id + " not found");
+	public UsuarioDTO findCPF(String cpf) {
+		
+		 UsuarioDTO usuario = usuarioRepository.findByCPF(cpf);
+		if (usuario == null) {
+			throw new EntityNotFoundException("Usuario with cpf " + cpf + " not found");
 	    }
+		
+		return usuario;
 	}
 }
