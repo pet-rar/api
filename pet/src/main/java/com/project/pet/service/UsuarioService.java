@@ -9,7 +9,7 @@ import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
 
 public interface UsuarioService {
-	// Save operation
+       // Save operation
 	Usuario saveUsuario(UsuarioRegisterDTO usuario);
 	 
 	// Read operation
@@ -24,5 +24,5 @@ public interface UsuarioService {
 	// Delete operation
 	void deleteUsuarioById(Long Id);
 	
-	Usuario findById(Long Id);
+	UsuarioDTO findCPF(String cpf);
 }
