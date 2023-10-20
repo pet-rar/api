@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
+import com.project.pet.dto.Usuario.UsuarioFindByCPFDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
@@ -24,5 +25,5 @@ public interface UsuarioService {
 	// Delete operation
 	void deleteUsuarioById(Long Id);
 	
-	UsuarioDTO findCPF(String cpf);
+	List<UsuarioFindAllDTO> findCPF(UsuarioFindByCPFDTO cpf);
 }

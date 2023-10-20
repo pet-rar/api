@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
+import com.project.pet.dto.Usuario.UsuarioFindByCPFDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
@@ -43,8 +44,8 @@ public class UsuarioController {
 		return UsuarioService.fetchUsuario(id);
 	}
 	
-	@GetMapping("/usuario/{cpf}")
-	public UsuarioDTO findUsuarioByCPF(@PathVariable("cpf") String cpf) {
+	@GetMapping("/usuario/cpf")
+	public List<UsuarioFindAllDTO> findUsuarioByCPF(@Valid @RequestBody UsuarioFindByCPFDTO cpf) {
 		return UsuarioService.findCPF(cpf);
 	}
 

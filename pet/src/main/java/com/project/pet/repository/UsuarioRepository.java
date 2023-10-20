@@ -14,15 +14,13 @@ import com.project.pet.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+    UserDetails findByemail(String email);
 
-	UserDetails findByemail(String email);
-
-	@Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.dataNascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.cpf = :cpf")
-        UsuarioDTO findByCPF(@Param("cpf") String cpf);
+    List<UsuarioFindAllDTO> findBycpfStartingWith(String cpf);
 		
-	@Query(value = "SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
-	List<UsuarioFindAllDTO> findAllUsuarios();
+    @Query(value = "SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
+    List<UsuarioFindAllDTO> findAllUsuarios();
 
-	@Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.dataNascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.id = :id")
+    @Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.dataNascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.id = :id")
     UsuarioDTO findUsuario(@Param("id") long id);
 }
