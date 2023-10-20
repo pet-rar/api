@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import java.util.List;
 
 import com.project.pet.model.Animal;
@@ -10,7 +11,7 @@ public interface AnimalService {
 	Animal saveAnimal(Animal animal);
  
     // Read operation
-    List<Animal> fetchAnimalList();
+    List<AnimalFindAllDTO> fetchAnimalList();
  
     // Update operation
     Animal updateAnimal(Animal Animal);

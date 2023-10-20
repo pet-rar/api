@@ -1,7 +1,5 @@
 package com.project.pet.model;
 
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -26,11 +25,11 @@ public class Animal {
 	 private String nome;
 	 
 	 @ManyToOne
-	 @JoinColumn(name = "idUsuario")
-	 private Usuario idUsuario;
+	 @JoinColumn(name = "id_usuario")
+	 private Usuario usuario;
 	 
 	 @Column
-	 private Date dataNascimento;
+	 private LocalDate dataNascimento;
 	 
 	 @Column(length = 255)
 	 private String especie;
@@ -53,6 +52,24 @@ public class Animal {
 	 
 	 @Column
 	 private Double peso;
+         
+        public Animal() {
+            super();
+        }
+        
+        public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raça, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso) {
+            super();
+            this.idAnimal = id;
+            this.nome = nome;
+            this.dataNascimento = dataNascimento;
+            this.especie = especie;
+            this.raça = raça;
+            this.tipo = tipo;
+            this.porte = porte;
+            this.pelagem = pelagem;
+            this.cor = cor;
+            this.peso = peso;
+        }
 
 	public Integer getIdAnimal() {
 		return idAnimal;
@@ -70,19 +87,19 @@ public class Animal {
 		this.nome = nome;
 	}
 
-	public Usuario getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Usuario idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

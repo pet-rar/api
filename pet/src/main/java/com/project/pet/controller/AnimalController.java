@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -28,7 +29,7 @@ public class AnimalController {
 	}
 
 	@GetMapping("/animal")
-	public List<Animal> listAnimal() {
+	public List<AnimalFindAllDTO> listAnimal() {
 		return AnimalService.fetchAnimalList();
 	}
 

@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class AnimalServiceImpl implements AnimalService {
 	}
 
 	@Override
-	public List<Animal> fetchAnimalList() {
+	public List<AnimalFindAllDTO> fetchAnimalList() {
 		
-		return animalRepository.findAll();
+		return animalRepository.findAllAnimais();
 	}
 
 	@Override
