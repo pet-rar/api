@@ -9,8 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.project.pet.dto.Usuario.UsuarioSaveDTO;
+import com.project.pet.model.AnimalTipo;
+import com.project.pet.model.Animal;
 import com.project.pet.model.UserTipo;
 import com.project.pet.model.Usuario;
+import com.project.pet.repository.AnimalRepository;
 import com.project.pet.repository.UsuarioRepository;
 
 @Component
@@ -18,10 +21,14 @@ public class DatabaseSeeder implements CommandLineRunner {
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
+        
+        @Autowired
+        AnimalRepository animalRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		seedUsuarios();
+                seedAnimais();
 	}
 
 	private void seedUsuarios() {
@@ -36,4 +43,14 @@ public class DatabaseSeeder implements CommandLineRunner {
             usuarioRepository.save(usuarioSeed);
 		}
 	}
+        
+        private void seedAnimais() {
+            if (animalRepository.count() == 0) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate dataNascimento = LocalDate.parse("2000-01-01", formatter);
+                Animal animalSeed = new Animal(1, "Animal", dataNascimento, "especie", "raça", AnimalTipo.MASCULINO, "porte", "pelagem", "cor", 5.5);
+                
+                animalRepository.save(animalSeed);
+            }
+        }
 }
