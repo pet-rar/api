@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.Animal.AnimalDTO;
 import com.project.pet.dto.Animal.AnimalFindAllByCpfDTO;
 import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import java.util.List;
@@ -12,6 +13,8 @@ public interface AnimalService {
     List<AnimalFindAllDTO> fetchAnimalListByCPF(AnimalFindAllByCpfDTO cpf);
 
     List<AnimalFindAllDTO> fetchAnimalList();
+    
+    AnimalDTO fetchAnimal(long id);
 
     Animal updateAnimal(Animal Animal);
 

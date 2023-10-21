@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.Animal.AnimalDTO;
 import com.project.pet.dto.Animal.AnimalFindAllByCpfDTO;
 import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import java.util.List;
@@ -31,6 +32,11 @@ public class AnimalController {
     public List<AnimalFindAllDTO> listAnimal() {
            return AnimalService.fetchAnimalList();
     }
+    
+    @GetMapping("/animal/{id}")
+    public AnimalDTO findAnimal(@PathVariable("id") Long id) {
+           return AnimalService.fetchAnimal(id);
+    }
 
     @PostMapping("/animal/cpf")
     public List<AnimalFindAllDTO> listAnimal(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
@@ -42,7 +48,7 @@ public class AnimalController {
         return AnimalService.updateAnimal(Animal);
     }
 
-    @DeleteMapping("/animal/{id}")
+    @DeleteMapping("/animal/delete/{id}")
     public String deleteDepartmentById(@PathVariable("id") Long Id) {
         AnimalService.deleteAnimalById(Id);
         return "Deleted Successfully";

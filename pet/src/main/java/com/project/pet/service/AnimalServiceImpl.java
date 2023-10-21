@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.Animal.AnimalDTO;
 import com.project.pet.dto.Animal.AnimalFindAllByCpfDTO;
 import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
@@ -17,6 +18,7 @@ import jakarta.persistence.EntityNotFoundException;
 public class AnimalServiceImpl implements AnimalService {	
     @Autowired
     private AnimalRepository animalRepository;
+    
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -27,6 +29,17 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public List<AnimalFindAllDTO> fetchAnimalList() {
         return animalRepository.findAllAnimais();
+    }
+    
+    @Override
+    public AnimalDTO fetchAnimal(long id) {	
+        AnimalDTO animal = animalRepository.findAnimal(id);
+
+        if(animal == null) {
+            throw new EntityNotFoundException("Animal não encontrado");
+        }
+
+       return animal;
     }
 
     @Override
