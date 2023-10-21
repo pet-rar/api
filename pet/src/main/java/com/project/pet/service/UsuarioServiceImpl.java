@@ -1,7 +1,6 @@
 package com.project.pet.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,7 +67,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         if (usuario.usuario().senha() != null) {
             usuarioEntity.setSenha(new BCryptPasswordEncoder().encode(usuario.usuario().senha()));
         } else {
-            Usuario existingUsuario = usuarioRepository.findById((long) usuarioEntity.getIdUsuario()).orElse(null);
+            Usuario existingUsuario = usuarioRepository.findById((long) usuarioEntity.getId()).orElse(null);
 
             if (existingUsuario != null) {
                 usuarioEntity.setSenha(existingUsuario.getSenha());

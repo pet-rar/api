@@ -26,175 +26,175 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Usuario implements UserDetails {
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    @Column(name = "id")
-	    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
 
-	    @Column(length = 255)
-	    private String nome;
+    @Column(length = 255)
+    private String nome;
 
-	    @Column(length = 300)
-	    private String senha;
+    @Column(length = 300)
+    private String senha;
 
-	    @Column(name = "data_nascimento")
-	    private LocalDate dataNascimento;
+    @Column(name = "data_nascimento")
+    private LocalDate data_nascimento;
 
-	    @Column()
-	    @Enumerated(EnumType.STRING)
-	    private UserTipo tipo;
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private UserTipo tipo;
 
-	    @Column(length = 15)
-	    private String telefone;
+    @Column(length = 15)
+    private String telefone;
 
-	    @Column(length = 14)
-	    private String cpf;
+    @Column(length = 14)
+    private String cpf;
 
-	    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) 
-	    @JoinColumn(name = "id_endereco")
-	    private Endereco endereco;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) 
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
 
-	    @Column(length = 255)
-	    private String email;
-	    
-	    public Usuario() {
-	    	super();
-	    }
-	    
-	    public Usuario(String email, String senha, UserTipo tipo) {
-			super();
-			this.email = email;
-			this.senha = senha;
-			this.tipo = tipo;
-		}
-	    
-		public Usuario(UsuarioSaveDTO usuarioSaveDTO) {
-			super();
-			this.nome = usuarioSaveDTO.nome();
-			this.senha = usuarioSaveDTO.senha();
-			this.dataNascimento = usuarioSaveDTO.dataNascimento();
-			this.tipo = usuarioSaveDTO.tipo();
-			this.telefone = usuarioSaveDTO.telefone();
-			this.cpf = usuarioSaveDTO.cpf();
-			this.email = usuarioSaveDTO.email();
-		}
-		
-		public Usuario(UsuarioSaveWithIdDTO usuario) {
-			super();
-			this.id = usuario.id();
-			this.nome = usuario.nome();
-			this.senha = usuario.senha();
-			this.dataNascimento = usuario.dataNascimento();
-			this.tipo = usuario.tipo();
-			this.telefone = usuario.telefone();
-			this.cpf = usuario.cpf();
-			this.email = usuario.email();
-		}
-		
-		@Override
-	    public Collection<? extends GrantedAuthority> getAuthorities() {
-	        if(this.tipo == UserTipo.FUNCIONARIO) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-	        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-	    }
-		public Integer getIdUsuario() {
-			return id;
-		}
+    @Column(length = 255)
+    private String email;
 
-		public void setIdUsuario(Integer id) {
-			this.id = id;
-		}
+    public Usuario() {
+        super();
+    }
 
-		public String getNome() {
-			return nome;
-		}
+    public Usuario(String email, String senha, UserTipo tipo) {
+        super();
+        this.email = email;
+        this.senha = senha;
+        this.tipo = tipo;
+    }
 
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
+    public Usuario(UsuarioSaveDTO usuarioSaveDTO) {
+        super();
+        this.nome = usuarioSaveDTO.nome();
+        this.senha = usuarioSaveDTO.senha();
+        this.data_nascimento = usuarioSaveDTO.data_nascimento();
+        this.tipo = usuarioSaveDTO.tipo();
+        this.telefone = usuarioSaveDTO.telefone();
+        this.cpf = usuarioSaveDTO.cpf();
+        this.email = usuarioSaveDTO.email();
+    }
 
-		public String getSenha() {
-			return senha;
-		}
+    public Usuario(UsuarioSaveWithIdDTO usuario) {
+        super();
+        this.id = usuario.id();
+        this.nome = usuario.nome();
+        this.senha = usuario.senha();
+        this.data_nascimento = usuario.data_nascimento();
+        this.tipo = usuario.tipo();
+        this.telefone = usuario.telefone();
+        this.cpf = usuario.cpf();
+        this.email = usuario.email();
+    }
 
-		public void setSenha(String senha) {
-			this.senha = senha;
-		}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.tipo == UserTipo.FUNCIONARIO) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+    public Integer getId() {
+        return id;
+    }
 
-		public LocalDate getDataNascimento() {
-			return dataNascimento;
-		}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-		public void setDataNascimento(LocalDate dataNascimento) {
-			this.dataNascimento = dataNascimento;
-		}
+    public String getNome() {
+        return nome;
+    }
 
-		public UserTipo getTipo() {
-			return tipo;
-		}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-		public void setTipo(UserTipo tipo) {
-			this.tipo = tipo;
-		}
+    public String getSenha() {
+        return senha;
+    }
 
-		public String getTelefone() {
-			return telefone;
-		}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-		public void setTelefone(String telefone) {
-			this.telefone = telefone;
-		}
+    public LocalDate getDataNascimento() {
+        return data_nascimento;
+    }
 
-		public String getCpf() {
-			return cpf;
-		}
+    public void setDataNascimento(LocalDate data_nascimento) {
+        this.data_nascimento = data_nascimento;
+    }
 
-		public void setCpf(String cpf) {
-			this.cpf = cpf;
-		}
+    public UserTipo getTipo() {
+        return tipo;
+    }
 
-		public Endereco getEndereco() {
-			return endereco;
-		}
+    public void setTipo(UserTipo tipo) {
+        this.tipo = tipo;
+    }
 
-		public void setEndereco(Endereco endereco) {
-			this.endereco = endereco;
-		}
+    public String getTelefone() {
+        return telefone;
+    }
 
-		public String getEmail() {
-			return email;
-		}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+    public String getCpf() {
+        return cpf;
+    }
 
-		@Override
-		public String getPassword() {
-			return this.senha;
-		}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-		@Override
-		public String getUsername() {
-			return this.nome;
-		}
-		
-		@Override
-		public boolean isAccountNonExpired() {
-			return true;
-		}
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-		@Override
-		public boolean isAccountNonLocked() {
-			return true;
-		}
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
-		@Override
-		public boolean isCredentialsNonExpired() {
-			return true;
-		}
+    public String getEmail() {
+        return email;
+    }
 
-		@Override
-		public boolean isEnabled() {
-			return true;
-		}	    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.nome;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }	    
 }

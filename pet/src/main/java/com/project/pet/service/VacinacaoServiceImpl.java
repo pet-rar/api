@@ -10,35 +10,26 @@ import com.project.pet.repository.VacinacaoRepository;
 
 @Service
 public class VacinacaoServiceImpl implements VacinacaoService{
+    @Autowired
+    private VacinacaoRepository vacinacaoRepository;
 
+    @Override
+    public Vacinacao saveVacinacao(Vacinacao vacinacao) {
+        return vacinacaoRepository.save(vacinacao);
+    }
 
-	@Autowired
-	private VacinacaoRepository vacinacaoRepository;
-	
-	
-	
-	@Override
-	public Vacinacao saveVacinacao(Vacinacao vacinacao) {
-		// TODO Auto-generated method stub
-		return vacinacaoRepository.save(vacinacao);
-	}
+    @Override
+    public List<Vacinacao> fetchVacinacaoList() {
+        return vacinacaoRepository.findAll();
+    }
 
-	@Override
-	public List<Vacinacao> fetchVacinacaoList() {
-		// TODO Auto-generated method stub
-		return vacinacaoRepository.findAll();
-	}
+    @Override
+    public Vacinacao updateVacinacao(Vacinacao vacinacao) {
+        return vacinacaoRepository.save(vacinacao);
+    }
 
-	@Override
-	public Vacinacao updateVacinacao(Vacinacao vacinacao) {
-		// TODO Auto-generated method stub
-		return vacinacaoRepository.save(vacinacao);
-	}
-
-	@Override
-	public void deleteVacinacaoById(Long Id) {
-		// TODO Auto-generated method stub
-		vacinacaoRepository.deleteById(Id);
-	}
-
+    @Override
+    public void deleteVacinacaoById(Long Id) {
+        vacinacaoRepository.deleteById(Id);
+    }
 }

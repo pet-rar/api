@@ -10,7 +10,6 @@ import com.project.pet.repository.UsuarioRepository;
 
 @Service
 public class AuthorizationService implements UserDetailsService {
-
     @Autowired
     UsuarioRepository repository;
     @Override

@@ -24,39 +24,39 @@ import com.project.pet.service.UsuarioService;
 
 @RestController
 public class UsuarioController {
-	@Autowired
-	private UsuarioService UsuarioService;
+    @Autowired
+    private UsuarioService UsuarioService;
 
-	@PostMapping("/usuario/register")
-	public ResponseEntity saveUsuario(@Valid @RequestBody UsuarioRegisterDTO Usuario) {
-		UsuarioService.saveUsuario(Usuario);
-		
-		return ResponseEntity.status(HttpStatus.CREATED).build();
-	}
+    @PostMapping("/usuario/register")
+    public ResponseEntity saveUsuario(@Valid @RequestBody UsuarioRegisterDTO Usuario) {
+        UsuarioService.saveUsuario(Usuario);
 
-	@GetMapping("/usuario")
-	public List<UsuarioFindAllDTO> listUsuario() {
-		return UsuarioService.fetchUsuarioList();
-	}
-	
-	@GetMapping("/usuario/{id}")
-	public UsuarioDTO findUsuario(@PathVariable("id") Long id) {
-		return UsuarioService.fetchUsuario(id);
-	}
-	
-	@PostMapping("/usuario/cpf")
-	public List<UsuarioFindAllDTO> findUsuarioByCPF(@Valid @RequestBody UsuarioFindByCPFDTO cpf) {
-		return UsuarioService.findCPF(cpf);
-	}
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
-	@PostMapping("/usuario/update")
-	public Usuario updateUsuario(@Valid @RequestBody UsuarioUpdateDTO Usuario) {
-		return UsuarioService.updateUsuario(Usuario);
-	}
+    @GetMapping("/usuario")
+    public List<UsuarioFindAllDTO> listUsuario() {
+        return UsuarioService.fetchUsuarioList();
+    }
 
-	@DeleteMapping("/usuario/delete/{id}")
-	public String deleteDepartmentById(@PathVariable("id") Long Id) {
-		UsuarioService.deleteUsuarioById(Id);
-		return "Deleted Successfully";
-	}
+    @GetMapping("/usuario/{id}")
+    public UsuarioDTO findUsuario(@PathVariable("id") Long id) {
+        return UsuarioService.fetchUsuario(id);
+    }
+
+    @PostMapping("/usuario/cpf")
+    public List<UsuarioFindAllDTO> findUsuarioByCPF(@Valid @RequestBody UsuarioFindByCPFDTO cpf) {
+        return UsuarioService.findCPF(cpf);
+    }
+
+    @PostMapping("/usuario/update")
+    public Usuario updateUsuario(@Valid @RequestBody UsuarioUpdateDTO Usuario) {
+        return UsuarioService.updateUsuario(Usuario);
+    }
+
+    @DeleteMapping("/usuario/delete/{id}")
+    public String deleteDepartmentById(@PathVariable("id") Long Id) {
+        UsuarioService.deleteUsuarioById(Id);
+        return "Deleted Successfully";
+    }
 }

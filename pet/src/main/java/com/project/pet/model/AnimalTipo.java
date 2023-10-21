@@ -1,19 +1,16 @@
 package com.project.pet.model;
 
-public enum AnimalTipo {
-	
-	FEMININO("FEMININO"),
-	
-	MASCULINO("MASCULINO");
-	
-	
-	private String tipo;
+public enum AnimalTipo {	
+    FEMININO("FEMININO"),
+    MASCULINO("MASCULINO");
 
-	private AnimalTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    private String tipo;
 
-	public String getTipo() {
-		return tipo;
-	}
+    private AnimalTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
 }

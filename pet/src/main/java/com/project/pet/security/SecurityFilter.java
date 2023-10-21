@@ -17,10 +17,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
-	
+public class SecurityFilter extends OncePerRequestFilter {	
     @Autowired
     TokenService tokenService;
+    
     @Autowired
     UsuarioRepository userRepository;
 

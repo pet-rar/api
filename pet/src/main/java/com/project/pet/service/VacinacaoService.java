@@ -5,15 +5,11 @@ import java.util.List;
 import com.project.pet.model.Vacinacao;
 
 public interface VacinacaoService {
-	// Save operation
-	Vacinacao saveVacinacao(Vacinacao vacinacao);
+    Vacinacao saveVacinacao(Vacinacao vacinacao);
 
-	// Read operation
-	List<Vacinacao> fetchVacinacaoList();
+    List<Vacinacao> fetchVacinacaoList();
 
-	// Update operation
-	Vacinacao updateVacinacao(Vacinacao vacinacao);
+    Vacinacao updateVacinacao(Vacinacao vacinacao);
 
-	// Delete operation
-	void deleteVacinacaoById(Long Id);
+    void deleteVacinacaoById(Long Id);
 }

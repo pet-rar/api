@@ -17,29 +17,27 @@ import com.project.pet.service.VacinacaoService;
 
 @RestController
 public class VacinacaoController {
+    @Autowired
+    private VacinacaoService vacinacaoService;
 
-	@Autowired
-	private VacinacaoService vacinacaoService;
+    @PostMapping("/vacinacao")
+    public Vacinacao saveVacinacao(@Valid @RequestBody Vacinacao vacinacao) {
+        return vacinacaoService.saveVacinacao(vacinacao);
+    }
 
-	@PostMapping("/vacinacao")
-	public Vacinacao saveVacinacao(@Valid @RequestBody Vacinacao vacinacao) {
+    @GetMapping("/vacinacao")
+    public List<Vacinacao> listVacinacao() {
+        return vacinacaoService.fetchVacinacaoList();
+    }
 
-		return vacinacaoService.saveVacinacao(vacinacao);
-	}
+    @PostMapping("/vacinacaoUpdate")
+    public Vacinacao updateVacinacao(Vacinacao vacinacao) {
+        return vacinacaoService.updateVacinacao(vacinacao);
+    }
 
-	@GetMapping("/vacinacao")
-	public List<Vacinacao> listVacinacao() {
-		return vacinacaoService.fetchVacinacaoList();
-	}
-
-	@PostMapping("/vacinacaoUpdate")
-	public Vacinacao updateVacinacao(Vacinacao vacinacao) {
-		return vacinacaoService.updateVacinacao(vacinacao);
-	}
-
-	@DeleteMapping("/vacinacao/{id}")
-	public String deleteDepartmentById(@PathVariable("id") Long Id) {
-		vacinacaoService.deleteVacinacaoById(Id);
-		return "Deleted Successfully";
-	}
+    @DeleteMapping("/vacinacao/{id}")
+    public String deleteDepartmentById(@PathVariable("id") Long Id) {
+        vacinacaoService.deleteVacinacaoById(Id);
+        return "Deleted Successfully";
+    }
 }

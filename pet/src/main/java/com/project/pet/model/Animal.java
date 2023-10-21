@@ -14,152 +14,147 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-public class Animal {
+public class Animal {	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
-	 private Integer idAnimal;
-	 
-	 @Column(length = 255)
-	 private String nome;
-	 
-	 @ManyToOne
-	 @JoinColumn(name = "id_usuario")
-	 private Usuario usuario;
-	 
-	 @Column
-	 private LocalDate dataNascimento;
-	 
-	 @Column(length = 255)
-	 private String especie;
-	 
-	 @Column(length = 255)
-	 private String raça;
-	 
-	 @Column(columnDefinition = "ENUM('Feminino', 'Masculino')")
-	 @Enumerated(EnumType.STRING)
-	 private AnimalTipo tipo;
-	 
-	 @Column(length = 100)
-	 private String porte;
-	 
-	 @Column(length = 250)
-	 private String pelagem;
-	 
-	 @Column(length = 100)
-	 private String cor;
-	 
-	 @Column
-	 private Double peso;
-         
-        public Animal() {
-            super();
-        }
-        
-        public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raça, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
-            super();
-            this.idAnimal = id;
-            this.nome = nome;
-            this.dataNascimento = dataNascimento;
-            this.especie = especie;
-            this.raça = raça;
-            this.tipo = tipo;
-            this.porte = porte;
-            this.pelagem = pelagem;
-            this.cor = cor;
-            this.peso = peso;
-            this.usuario = usuario;
-        }
+    @Column(length = 255)
+    private String nome;
 
-	public Integer getIdAnimal() {
-		return idAnimal;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
-	public void setIdAnimal(Integer idAnimal) {
-		this.idAnimal = idAnimal;
-	}
+    @Column
+    private LocalDate data_nascimento;
 
-	public String getNome() {
-		return nome;
-	}
+    @Column(length = 255)
+    private String especie;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    @Column(length = 255)
+    private String raca;
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    @Column(columnDefinition = "ENUM('Feminino', 'Masculino')")
+    @Enumerated(EnumType.STRING)
+    private AnimalTipo tipo;
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    @Column(length = 100)
+    private String porte;
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
+    @Column(length = 250)
+    private String pelagem;
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+    @Column(length = 100)
+    private String cor;
 
-	public String getEspecie() {
-		return especie;
-	}
+    @Column
+    private Double peso;
 
-	public void setEspecie(String especie) {
-		this.especie = especie;
-	}
+   public Animal() {
+    super();
+   }
 
-	public String getRaça() {
-		return raça;
-	}
+   public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
+    super();
+    this.id = id;
+    this.nome = nome;
+    this.data_nascimento = dataNascimento;
+    this.especie = especie;
+    this.raca = raca;
+    this.tipo = tipo;
+    this.porte = porte;
+    this.pelagem = pelagem;
+    this.cor = cor;
+    this.peso = peso;
+    this.usuario = usuario;
+   }
 
-	public void setRaça(String raça) {
-		this.raça = raça;
-	}
+   public Integer getId() {
+    return id;
+   }
 
-	public AnimalTipo getTipo() {
-		return tipo;
-	}
+   public void setId(Integer id) {
+    this.id = id;
+   }
 
-	public void setTipo(AnimalTipo tipo) {
-		this.tipo = tipo;
-	}
+   public String getNome() {
+    return nome;
+   }
 
-	public String getPorte() {
-		return porte;
-	}
+   public void setNome(String nome) {
+    this.nome = nome;
+   }
 
-	public void setPorte(String porte) {
-		this.porte = porte;
-	}
+   public Usuario getUsuario() {
+    return usuario;
+   }
 
-	public String getPelagem() {
-		return pelagem;
-	}
+   public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+   }
 
-	public void setPelagem(String pelagem) {
-		this.pelagem = pelagem;
-	}
+   public LocalDate getDataNascimento() {
+    return data_nascimento;
+   }
 
-	public String getCor() {
-		return cor;
-	}
+   public void setDataNascimento(LocalDate data_nascimento) {
+    this.data_nascimento = data_nascimento;
+   }
 
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
+   public String getEspecie() {
+    return especie;
+   }
 
-	public Double getPeso() {
-		return peso;
-	}
+   public void setEspecie(String especie) {
+    this.especie = especie;
+   }
 
-	public void setPeso(Double peso) {
-		this.peso = peso;
-	}
-	 
-	 
-	 
+   public String getRaca() {
+    return raca;
+   }
+
+   public void setRaca(String raca) {
+    this.raca = raca;
+   }
+
+   public AnimalTipo getTipo() {
+    return tipo;
+   }
+
+   public void setTipo(AnimalTipo tipo) {
+    this.tipo = tipo;
+   }
+
+   public String getPorte() {
+    return porte;
+   }
+
+   public void setPorte(String porte) {
+    this.porte = porte;
+   }
+
+   public String getPelagem() {
+    return pelagem;
+   }
+
+   public void setPelagem(String pelagem) {
+    this.pelagem = pelagem;
+   }
+
+   public String getCor() {
+    return cor;
+   }
+
+   public void setCor(String cor) {
+    this.cor = cor;
+   }
+
+   public Double getPeso() {
+    return peso;
+   }
+
+   public void setPeso(Double peso) {
+    this.peso = peso;
+   }
 }

@@ -23,28 +23,27 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfigurations {
-  
-	@Autowired
-	SecurityFilter securityFilter;
+public class SecurityConfigurations {  
+    @Autowired
+    SecurityFilter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return  httpSecurity
-                .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/animal").hasRole("FUNCIONARIO")
-                        .requestMatchers(HttpMethod.POST, "/endereco").hasRole("FUNCIONARIO")
-                        .requestMatchers(HttpMethod.POST, "/usuario").hasRole("FUNCIONARIO")
-                        .requestMatchers(HttpMethod.POST, "/vacinacao").hasRole("FUNCIONARIO")
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) 
-                .build();
+            .cors(Customizer.withDefaults())
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/animal").hasRole("FUNCIONARIO")
+                .requestMatchers(HttpMethod.POST, "/endereco").hasRole("FUNCIONARIO")
+                .requestMatchers(HttpMethod.POST, "/usuario").hasRole("FUNCIONARIO")
+                .requestMatchers(HttpMethod.POST, "/vacinacao").hasRole("FUNCIONARIO")
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) 
+            .build();
     }
 
     @Bean

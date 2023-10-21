@@ -18,9 +18,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     List<UsuarioFindAllDTO> findBycpfStartingWith(String cpf);
 		
-    @Query(value = "SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
+    @Query("SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
     List<UsuarioFindAllDTO> findAllUsuarios();
 
-    @Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.dataNascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.id = :id")
+    @Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.data_nascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.id = :id")
     UsuarioDTO findUsuario(@Param("id") long id);
 }

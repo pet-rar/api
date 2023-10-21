@@ -1,7 +1,5 @@
 package com.project.pet.model;
 
-import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,69 +10,66 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "vacinacao")
 public class Vacinacao {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @Column(length = 255)
+    private String descricao;
 
-	@Column(length = 255)
-	private String descricao;
+    @Column
+    private LocalDate data_vacinacao;
 
-	@Column
-	private Date dataVacinacao;
+    @ManyToOne
+    @JoinColumn(name = "id_animal")
+    private Animal animal;
 
-	// Usando @ManyToOne para representar o relacionamento com Animal
-	@ManyToOne
-	@JoinColumn(name = "idAnimal") // Isso cria uma coluna idAnimal na tabela Vacinacao para mapear o
-									// relacionamento
-	private Animal animal;
+    @Column(columnDefinition = "ENUM('aplicado', 'pendente')")
+    @Enumerated(EnumType.STRING)
+    private VacinacaoStatus status;
 
-	@Column(columnDefinition = "ENUM('aplicado', 'pendente')")
-	@Enumerated(EnumType.STRING)
-	private VaccinationStatus status;
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public LocalDate getDataVacinacao() {
+        return data_vacinacao;
+    }
 
-	public Date getDataVacinacao() {
-		return dataVacinacao;
-	}
+    public void setDataVacinacao(LocalDate data_vacinacao) {
+            this.data_vacinacao = data_vacinacao;
+    }
 
-	public void setDataVacinacao(Date dataVacinacao) {
-		this.dataVacinacao = dataVacinacao;
-	}
+    public Animal getAnimal() {
+        return animal;
+    }
 
-	public Animal getAnimal() {
-		return animal;
-	}
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
 
-	public void setAnimal(Animal animal) {
-		this.animal = animal;
-	}
+    public VacinacaoStatus getStatus() {
+        return status;
+    }
 
-	public VaccinationStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(VaccinationStatus status) {
-		this.status = status;
-	}
-
+    public void setStatus(VacinacaoStatus status) {
+        this.status = status;
+    }
 }

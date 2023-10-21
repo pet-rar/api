@@ -10,34 +10,26 @@ import com.project.pet.repository.EnderecoRepository;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService{
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
-	@Autowired
-	private EnderecoRepository enderecoRepository;
-	
-	
-	@Override
-	public Endereco saveEndereco(Endereco endereco) {
-		
-		return enderecoRepository.save(endereco);
-	}
+    @Override
+    public Endereco saveEndereco(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+    }
 
-	@Override
-	public List<Endereco> fetchEnderecoList() {
-	
-		return enderecoRepository.findAll();
-	}
+    @Override
+    public List<Endereco> fetchEnderecoList() {
+        return enderecoRepository.findAll();
+    }
 
-	@Override
-	public Endereco updateEndereco(Endereco endereco) {
-		
-		return enderecoRepository.save(endereco);
-	}
+    @Override
+    public Endereco updateEndereco(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+    }
 
-	@Override
-	public void deleteEnderecoById(Long Id) {
-		
-		enderecoRepository.deleteById(Id);
-		
-	}
-
+    @Override
+    public void deleteEnderecoById(Long Id) {
+        enderecoRepository.deleteById(Id);
+    }
 }

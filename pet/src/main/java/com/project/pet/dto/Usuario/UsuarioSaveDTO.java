@@ -4,5 +4,4 @@ import java.time.LocalDate;
 
 import com.project.pet.model.UserTipo;
 
-public record UsuarioSaveDTO(String nome, String cpf, LocalDate dataNascimento, String telefone, UserTipo tipo, String email, String senha) {
-}
+public record UsuarioSaveDTO(String nome, String cpf, LocalDate data_nascimento, String telefone, UserTipo tipo, String email, String senha) {}

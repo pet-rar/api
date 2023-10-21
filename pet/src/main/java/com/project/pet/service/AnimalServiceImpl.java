@@ -55,5 +55,4 @@ public class AnimalServiceImpl implements AnimalService {
 
         return animais;
     }
-
 }

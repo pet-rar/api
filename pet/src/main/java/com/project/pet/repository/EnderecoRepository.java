@@ -5,7 +5,4 @@ import org.springframework.stereotype.Repository;
 
 import com.project.pet.model.Endereco;
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco,Long> {
-
-
-}
+public interface EnderecoRepository extends JpaRepository<Endereco,Long> {}

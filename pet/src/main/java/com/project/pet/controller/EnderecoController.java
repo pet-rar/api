@@ -17,29 +17,28 @@ import com.project.pet.service.EnderecoService;
 
 @RestController
 public class EnderecoController {
+    @Autowired
+    private EnderecoService EnderecoService;
 
-	@Autowired
-	private EnderecoService EnderecoService;
+    @PostMapping("/endereco")
+    public Endereco saveEndereco(@Valid @RequestBody Endereco Endereco) {
+        return EnderecoService.saveEndereco(Endereco);
+    }
 
-	@PostMapping("/endereco")
-	public Endereco saveEndereco(@Valid @RequestBody Endereco Endereco) {
+    @GetMapping("/endereco")
+    public List<Endereco> listEndereco() {
+        return EnderecoService.fetchEnderecoList();
+    }
 
-		return EnderecoService.saveEndereco(Endereco);
-	}
+    @PostMapping("/enderecoUpdate")
+    public Endereco updateEndereco(Endereco Endereco) {
+        return EnderecoService.updateEndereco(Endereco);
+    }
 
-	@GetMapping("/endereco")
-	public List<Endereco> listEndereco() {
-		return EnderecoService.fetchEnderecoList();
-	}
-
-	@PostMapping("/enderecoUpdate")
-	public Endereco updateEndereco(Endereco Endereco) {
-		return EnderecoService.updateEndereco(Endereco);
-	}
-
-	@DeleteMapping("/endereco/{id}")
-	public String deleteDepartmentById(@PathVariable("id") Long Id) {
-		EnderecoService.deleteEnderecoById(Id);
-		return "Deleted Successfully";
-	}
+    @DeleteMapping("/endereco/{id}")
+    public String deleteDepartmentById(@PathVariable("id") Long Id) {
+        EnderecoService.deleteEnderecoById(Id);
+        return "Deleted Successfully";
+    }
 }
+

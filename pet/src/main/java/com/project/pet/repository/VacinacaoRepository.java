@@ -10,8 +10,7 @@ import com.project.pet.model.Vacinacao;
 
 @Repository
 public interface VacinacaoRepository extends JpaRepository<Vacinacao, Long> {
-
-	@Query(value = "SELECT v.id,a.nome,v.descricao,v.data_vacinacao,v.status  from vacinacao as v"
-			+ "inner join animal as a on v.id_animal = a.id_animal", nativeQuery = true)
-	List<Vacinacao> findAll();
+    @Query(value = "SELECT v.id,a.nome,v.descricao,v.data_vacinacao,v.status  from vacinacao as v"
+        + "inner join animal as a on v.id_animal = a.id_animal", nativeQuery = true)
+    List<Vacinacao> findAll();
 }

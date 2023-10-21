@@ -19,34 +19,32 @@ import com.project.pet.service.AnimalService;
 
 @RestController
 public class AnimalController {
+    @Autowired
+    private AnimalService AnimalService;
 
-	@Autowired
-	private AnimalService AnimalService;
+    @PostMapping("/animal")
+    public Animal saveAnimal(@Valid @RequestBody Animal Animal) {
+        return AnimalService.saveAnimal(Animal);
+    }
 
-	@PostMapping("/animal")
-	public Animal saveAnimal(@Valid @RequestBody Animal Animal) {
+    @GetMapping("/animal")
+    public List<AnimalFindAllDTO> listAnimal() {
+           return AnimalService.fetchAnimalList();
+    }
 
-		return AnimalService.saveAnimal(Animal);
-	}
+    @PostMapping("/animal/cpf")
+    public List<AnimalFindAllDTO> listAnimal(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
+        return AnimalService.fetchAnimalListByCPF(cpf);
+    }
 
-	@GetMapping("/animal")
-	public List<AnimalFindAllDTO> listAnimal() {
-		return AnimalService.fetchAnimalList();
-	}
-        
-        @PostMapping("/animal/cpf")
-	public List<AnimalFindAllDTO> listAnimal(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
-		return AnimalService.fetchAnimalListByCPF(cpf);
-	}
+    @PostMapping("/animalUpdate")
+    public Animal updateAnimal(Animal Animal) {
+        return AnimalService.updateAnimal(Animal);
+    }
 
-	@PostMapping("/animalUpdate")
-	public Animal updateAnimal(Animal Animal) {
-		return AnimalService.updateAnimal(Animal);
-	}
-
-	@DeleteMapping("/animal/{id}")
-	public String deleteDepartmentById(@PathVariable("id") Long Id) {
-		AnimalService.deleteAnimalById(Id);
-		return "Deleted Successfully";
-	}
+    @DeleteMapping("/animal/{id}")
+    public String deleteDepartmentById(@PathVariable("id") Long Id) {
+        AnimalService.deleteAnimalById(Id);
+        return "Deleted Successfully";
+    }
 }

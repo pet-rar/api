@@ -10,20 +10,15 @@ import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
 
 public interface UsuarioService {
-       // Save operation
-	Usuario saveUsuario(UsuarioRegisterDTO usuario);
-	 
-	// Read operation
-	List<UsuarioFindAllDTO> fetchUsuarioList();
+    Usuario saveUsuario(UsuarioRegisterDTO usuario);
+
+    List<UsuarioFindAllDTO> fetchUsuarioList();
+
+    UsuarioDTO fetchUsuario(long id);
+
+    Usuario updateUsuario(UsuarioUpdateDTO usuario);
+
+    void deleteUsuarioById(Long Id);
 	
-	// Read operation
-	UsuarioDTO fetchUsuario(long id);
-	 
-	// Update operation
-	Usuario updateUsuario(UsuarioUpdateDTO usuario);
-	 
-	// Delete operation
-	void deleteUsuarioById(Long Id);
-	
-	List<UsuarioFindAllDTO> findCPF(UsuarioFindByCPFDTO cpf);
+    List<UsuarioFindAllDTO> findCPF(UsuarioFindByCPFDTO cpf);
 }
