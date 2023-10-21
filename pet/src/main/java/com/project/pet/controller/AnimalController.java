@@ -39,7 +39,7 @@ public class AnimalController {
     }
 
     @PostMapping("/animal/cpf")
-    public List<AnimalFindAllDTO> listAnimal(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
+    public List<AnimalFindAllDTO> listAnimalByCPF(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
         return AnimalService.fetchAnimalListByCPF(cpf);
     }
 
