@@ -44,7 +44,7 @@ public class UsuarioController {
 		return UsuarioService.fetchUsuario(id);
 	}
 	
-	@GetMapping("/usuario/cpf")
+	@PostMapping("/usuario/cpf")
 	public List<UsuarioFindAllDTO> findUsuarioByCPF(@Valid @RequestBody UsuarioFindByCPFDTO cpf) {
 		return UsuarioService.findCPF(cpf);
 	}
