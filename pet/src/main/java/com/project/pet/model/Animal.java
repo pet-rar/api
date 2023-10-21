@@ -57,7 +57,7 @@ public class Animal {
             super();
         }
         
-        public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raça, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso) {
+        public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raça, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
             super();
             this.idAnimal = id;
             this.nome = nome;
@@ -69,6 +69,7 @@ public class Animal {
             this.pelagem = pelagem;
             this.cor = cor;
             this.peso = peso;
+            this.usuario = usuario;
         }
 
 	public Integer getIdAnimal() {
