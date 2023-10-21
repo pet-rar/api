@@ -1,7 +1,7 @@
 package com.project.pet.model;
 
 public enum VacinacaoStatus {
-    APLICADO("APLICADO"),
+    APLICADA("APLICADA"),
     PENDENTE("PENDENTE");
 
     private String status;

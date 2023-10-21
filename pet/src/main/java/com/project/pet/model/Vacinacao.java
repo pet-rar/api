@@ -29,7 +29,7 @@ public class Vacinacao {
     @JoinColumn(name = "id_animal")
     private Animal animal;
 
-    @Column(columnDefinition = "ENUM('aplicado', 'pendente')")
+    @Column(columnDefinition = "ENUM('aplicada', 'pendente')")
     @Enumerated(EnumType.STRING)
     private VacinacaoStatus status;
 

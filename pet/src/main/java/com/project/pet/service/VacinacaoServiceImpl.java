@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class VacinacaoServiceImpl implements VacinacaoService{
     }
 
     @Override
-    public List<Vacinacao> fetchVacinacaoList() {
-        return vacinacaoRepository.findAll();
+    public List<VacinacaoFindAllDTO> fetchVacinacaoList() {       
+        return vacinacaoRepository.findAllVacinacoes();
     }
 
     @Override

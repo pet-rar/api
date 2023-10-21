@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ public class VacinacaoController {
     }
 
     @GetMapping("/vacinacao")
-    public List<Vacinacao> listVacinacao() {
+    public List<VacinacaoFindAllDTO> listVacinacao() {
         return vacinacaoService.fetchVacinacaoList();
     }
 
