@@ -2,6 +2,7 @@ package com.project.pet.controller;
 
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,15 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pet.model.Vacinacao;
 import com.project.pet.service.VacinacaoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 public class VacinacaoController {
     @Autowired
     private VacinacaoService vacinacaoService;
 
-    @PostMapping("/vacinacao")
-    public Vacinacao saveVacinacao(@Valid @RequestBody Vacinacao vacinacao) {
-        return vacinacaoService.saveVacinacao(vacinacao);
+    @PostMapping("/vacinacao/save")
+    public ResponseEntity saveVacinacao(@Valid @RequestBody VacinacaoSaveDTO vacinacao) {
+        vacinacaoService.saveVacinacao(vacinacao);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/vacinacao")

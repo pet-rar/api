@@ -2,12 +2,13 @@ package com.project.pet.service;
 
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
 import java.util.List;
 
 import com.project.pet.model.Vacinacao;
 
 public interface VacinacaoService {
-    Vacinacao saveVacinacao(Vacinacao vacinacao);
+    Vacinacao saveVacinacao(VacinacaoSaveDTO vacinacao);
 
     List<VacinacaoFindAllDTO> fetchVacinacaoList();
     

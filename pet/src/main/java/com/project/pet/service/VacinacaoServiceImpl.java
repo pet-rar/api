@@ -3,15 +3,19 @@ package com.project.pet.service;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.pet.model.Vacinacao;
+import com.project.pet.model.Animal;
+import com.project.pet.repository.AnimalRepository;
 import com.project.pet.repository.UsuarioRepository;
 import com.project.pet.repository.VacinacaoRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 public class VacinacaoServiceImpl implements VacinacaoService{
@@ -20,10 +24,19 @@ public class VacinacaoServiceImpl implements VacinacaoService{
     
     @Autowired
     private UsuarioRepository usuarioRepository;
-
+    
+    @Autowired
+    private AnimalRepository animalRepository;
+    
     @Override
-    public Vacinacao saveVacinacao(Vacinacao vacinacao) {
-        return vacinacaoRepository.save(vacinacao);
+    public Vacinacao saveVacinacao(VacinacaoSaveDTO vacinacao) {
+         Optional<Animal> animal = animalRepository.findById((long) vacinacao.id_animal());
+        Animal animalEntity = new Animal(animal);
+
+        Vacinacao vacinacaoEntity = new Vacinacao(vacinacao);
+        vacinacaoEntity.setAnimal(animalEntity);
+        
+        return vacinacaoRepository.save(vacinacaoEntity);
     }
 
     @Override

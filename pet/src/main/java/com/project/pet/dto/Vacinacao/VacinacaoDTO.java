@@ -1,5 +1,5 @@
 package com.project.pet.dto.Vacinacao;
 
-import java.time.LocalDate; 
+import java.time.LocalDateTime; 
 
-public record VacinacaoDTO(Integer idTutor, Integer idAnimal, String descricao, LocalDate dataVacinacao, String hora, String status  ) {}
+public record VacinacaoDTO(Integer idTutor, Integer idAnimal, String descricao, LocalDateTime dataVacinacao, String hora, String status  ) {}

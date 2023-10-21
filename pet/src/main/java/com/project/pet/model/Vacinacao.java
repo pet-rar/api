@@ -1,5 +1,6 @@
 package com.project.pet.model;
 
+import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vacinacao")
@@ -23,7 +24,7 @@ public class Vacinacao {
     private String descricao;
 
     @Column
-    private LocalDate data_vacinacao;
+    private LocalDateTime data_vacinacao;
 
     @ManyToOne
     @JoinColumn(name = "id_animal")
@@ -32,6 +33,12 @@ public class Vacinacao {
     @Column(columnDefinition = "ENUM('aplicada', 'pendente')")
     @Enumerated(EnumType.STRING)
     private VacinacaoStatus status;
+    
+    public Vacinacao(VacinacaoSaveDTO vacinacao) {
+        this.descricao = vacinacao.descricao();
+        this.data_vacinacao = vacinacao.data_vacinacao();
+        this.status = VacinacaoStatus.PENDENTE;
+    }
 
     public Integer getId() {
         return id;
@@ -49,12 +56,12 @@ public class Vacinacao {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataVacinacao() {
+    public LocalDateTime getDataVacinacao() {
         return data_vacinacao;
     }
 
-    public void setDataVacinacao(LocalDate data_vacinacao) {
-            this.data_vacinacao = data_vacinacao;
+    public void setDataVacinacao(LocalDateTime data_vacinacao) {
+        this.data_vacinacao = data_vacinacao;
     }
 
     public Animal getAnimal() {

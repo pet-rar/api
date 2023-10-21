@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table
@@ -53,6 +54,20 @@ public class Animal {
 
    public Animal() {
     super();
+   }
+   
+   public Animal(Optional<Animal> animal) {
+    super();
+    this.id = animal.get().getId();
+    this.nome = animal.get().getNome();
+    this.data_nascimento = animal.get().getDataNascimento();
+    this.especie = animal.get().getEspecie();
+    this.raca = animal.get().getRaca();
+    this.tipo = animal.get().getTipo();
+    this.porte = animal.get().getPorte();
+    this.pelagem = animal.get().getPelagem();
+    this.cor = animal.get().getCor();
+    this.peso = animal.get().getPeso();
    }
 
    public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
