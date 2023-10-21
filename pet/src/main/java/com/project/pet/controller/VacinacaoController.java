@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class VacinacaoController {
     @GetMapping("/vacinacao")
     public List<VacinacaoFindAllDTO> listVacinacao() {
         return vacinacaoService.fetchVacinacaoList();
+    }
+    
+    @PostMapping("/vacinacao/cpf")
+    public List<VacinacaoFindAllDTO> listVacinacaoByCPF(@Valid @RequestBody VacinacaoFindAllByCpfDTO cpf) {
+        return vacinacaoService.fetchVacinacaoListByCPF(cpf);
     }
 
     @PostMapping("/vacinacaoUpdate")
