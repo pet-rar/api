@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.Animal.AnimalFindAllByCpfDTO;
 import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class AnimalController {
 	@GetMapping("/animal")
 	public List<AnimalFindAllDTO> listAnimal() {
 		return AnimalService.fetchAnimalList();
+	}
+        
+        @PostMapping("/animal/cpf")
+	public List<AnimalFindAllDTO> listAnimal(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
+		return AnimalService.fetchAnimalListByCPF(cpf);
 	}
 
 	@PostMapping("/animalUpdate")

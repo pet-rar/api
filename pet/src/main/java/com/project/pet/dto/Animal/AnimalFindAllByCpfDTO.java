@@ -1,5 +1,3 @@
 package com.project.pet.dto.Animal;
 
-public record AnimalFindAllByCpfDTO(String cpfTutor, Integer idAnimal) {
-
-}
+public record AnimalFindAllByCpfDTO(String cpf) {}
