@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.Vacinacao.VacinacaoDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
@@ -37,13 +38,18 @@ public class VacinacaoController {
         return vacinacaoService.fetchVacinacaoList();
     }
     
+    @GetMapping("/vacinacao/{id}")
+    public VacinacaoDTO findVacinacao(@PathVariable("id") Long id) {
+        return vacinacaoService.fetchVacinacao(id);
+    }
+    
     @PostMapping("/vacinacao/cpf")
     public List<VacinacaoFindAllDTO> listVacinacaoByCPF(@Valid @RequestBody VacinacaoFindAllByCpfDTO cpf) {
         return vacinacaoService.fetchVacinacaoListByCPF(cpf);
     }
 
-    @PostMapping("/vacinacaoUpdate")
-    public Vacinacao updateVacinacao(Vacinacao vacinacao) {
+    @PostMapping("/vacinacao/update")
+    public Vacinacao updateVacinacao(@Valid @RequestBody Vacinacao vacinacao) {
         return vacinacaoService.updateVacinacao(vacinacao);
     }
 

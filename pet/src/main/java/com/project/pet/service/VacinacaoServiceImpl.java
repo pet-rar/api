@@ -1,6 +1,7 @@
 package com.project.pet.service;
 
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
@@ -42,6 +43,17 @@ public class VacinacaoServiceImpl implements VacinacaoService{
     @Override
     public List<VacinacaoFindAllDTO> fetchVacinacaoList() {       
         return vacinacaoRepository.findAllVacinacoes();
+    }
+    
+    @Override
+    public VacinacaoDTO fetchVacinacao(Long id) {	
+        VacinacaoDTO vacinacao = vacinacaoRepository.findVacinacao(id);
+
+        if(vacinacao == null) {
+            throw new EntityNotFoundException("Vacinacao nao encontrada");
+        }
+
+       return vacinacao;
     }
     
     @Override
