@@ -54,7 +54,7 @@ public class VacinacaoController {
         return vacinacaoService.updateVacinacao(vacinacao);
     }
 
-    @DeleteMapping("/vacinacao/{id}")
+    @DeleteMapping("/vacinacao/delete/{id}")
     public String deleteDepartmentById(@PathVariable("id") Long Id) {
         vacinacaoService.deleteVacinacaoById(Id);
         return "Deleted Successfully";
