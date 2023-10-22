@@ -3,6 +3,8 @@ package com.project.pet.controller;
 import com.project.pet.dto.Animal.AnimalDTO;
 import com.project.pet.dto.Animal.AnimalFindAllByCpfDTO;
 import com.project.pet.dto.Animal.AnimalFindAllDTO;
+import com.project.pet.dto.Animal.AnimalSaveDTO;
+import com.project.pet.dto.Animal.AnimalUpdateDTO;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,8 +25,8 @@ public class AnimalController {
     @Autowired
     private AnimalService AnimalService;
 
-    @PostMapping("/animal")
-    public Animal saveAnimal(@Valid @RequestBody Animal Animal) {
+    @PostMapping("/animal/save")
+    public Animal saveAnimal(@Valid @RequestBody AnimalSaveDTO Animal) {
         return AnimalService.saveAnimal(Animal);
     }
 
@@ -43,8 +45,8 @@ public class AnimalController {
         return AnimalService.fetchAnimalListByCPF(cpf);
     }
 
-    @PostMapping("/animalUpdate")
-    public Animal updateAnimal(Animal Animal) {
+    @PostMapping("/animal/update")
+    public Animal updateAnimal(@Valid @RequestBody AnimalUpdateDTO Animal) {
         return AnimalService.updateAnimal(Animal);
     }
 

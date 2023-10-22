@@ -86,6 +86,20 @@ public class Animal {
     this.usuario = usuario;
    }
    
+    public Animal(String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
+    super();
+    this.nome = nome;
+    this.data_nascimento = dataNascimento;
+    this.especie = especie;
+    this.raca = raca;
+    this.tipo = tipo;
+    this.porte = porte;
+    this.pelagem = pelagem;
+    this.cor = cor;
+    this.peso = peso;
+    this.usuario = usuario;
+   }
+   
    public Animal(AnimalDTO animal) {
     super();
     this.id = animal.id();
