@@ -44,9 +44,6 @@ public class Animal {
     @Column(length = 100)
     private String porte;
 
-    @Column(length = 250)
-    private String pelagem;
-
     @Column(length = 100)
     private String cor;
 
@@ -66,12 +63,11 @@ public class Animal {
     this.raca = animal.get().getRaca();
     this.tipo = animal.get().getTipo();
     this.porte = animal.get().getPorte();
-    this.pelagem = animal.get().getPelagem();
     this.cor = animal.get().getCor();
     this.peso = animal.get().getPeso();
    }
 
-   public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
+   public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String cor, Double peso, Usuario usuario) {
     super();
     this.id = id;
     this.nome = nome;
@@ -80,13 +76,12 @@ public class Animal {
     this.raca = raca;
     this.tipo = tipo;
     this.porte = porte;
-    this.pelagem = pelagem;
     this.cor = cor;
     this.peso = peso;
     this.usuario = usuario;
    }
    
-    public Animal(String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String pelagem, String cor, Double peso, Usuario usuario) {
+    public Animal(String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String cor, Double peso, Usuario usuario) {
     super();
     this.nome = nome;
     this.data_nascimento = dataNascimento;
@@ -94,7 +89,6 @@ public class Animal {
     this.raca = raca;
     this.tipo = tipo;
     this.porte = porte;
-    this.pelagem = pelagem;
     this.cor = cor;
     this.peso = peso;
     this.usuario = usuario;
@@ -109,7 +103,6 @@ public class Animal {
     this.raca = animal.raca();
     this.tipo = animal.tipo();
     this.porte = animal.porte();
-    this.pelagem = animal.pelagem();
     this.cor = animal.cor();
     this.peso = animal.peso();
    }
@@ -177,15 +170,7 @@ public class Animal {
    public void setPorte(String porte) {
     this.porte = porte;
    }
-
-   public String getPelagem() {
-    return pelagem;
-   }
-
-   public void setPelagem(String pelagem) {
-    this.pelagem = pelagem;
-   }
-
+   
    public String getCor() {
     return cor;
    }

@@ -52,7 +52,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             UsuarioSaveWithIdDTO usuario = new UsuarioSaveWithIdDTO(1, "Admin", "999.999.999-99", data_nascimento, "(99) 99999-9999", UserTipo.FUNCIONARIO, "admin@email.com", "Admin@123");
             Usuario usuarioSeed = new Usuario(usuario);
 
-            Animal animalSeed = new Animal(1, "Animal", data_nascimento, "especie", "raca", AnimalTipo.MASCULINO, "porte", "pelagem", "cor", 5.5, usuarioSeed);
+            Animal animalSeed = new Animal(1, "Animal", data_nascimento, "especie", "raca", AnimalTipo.MASCULINO, "porte", "cor", 5.5, usuarioSeed);
 
             animalRepository.save(animalSeed);
         }

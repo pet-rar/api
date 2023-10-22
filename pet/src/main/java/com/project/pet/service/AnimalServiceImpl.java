@@ -38,7 +38,7 @@ public class AnimalServiceImpl implements AnimalService {
             System.err.println("Erro: Usuário não cadastrado");
     	}
       
-        Animal animalEntity = new Animal(animal.nome(), animal.data_nascimento(), animal.especie(), animal.raca(), animal.tipo(), animal.porte(), animal.pelagem(), animal.cor(), animal.peso(), usuario);
+        Animal animalEntity = new Animal(animal.nome(), animal.data_nascimento(), animal.especie(), animal.raca(), animal.tipo(), animal.porte(), animal.cor(), animal.peso(), usuario);
     	    	 
         return animalRepository.save(animalEntity);
     }
@@ -72,7 +72,7 @@ public class AnimalServiceImpl implements AnimalService {
             System.err.println("Erro: Usuário não cadastrado");
     	}
       
-        Animal animalEntity = new Animal(animal.id(), animal.nome(), animal.data_nascimento(),animal.especie(),animal.raca(),animal.tipo(),animal.porte(),animal.pelagem(), animal.cor(),animal.peso(), usuario);
+        Animal animalEntity = new Animal(animal.id(), animal.nome(), animal.data_nascimento(),animal.especie(),animal.raca(),animal.tipo(),animal.porte(), animal.cor(),animal.peso(), usuario);
     	    	
         return animalRepository.save(animalEntity);
     }
