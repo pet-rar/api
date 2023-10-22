@@ -4,6 +4,7 @@ import com.project.pet.dto.Vacinacao.VacinacaoDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoUpdateDTO;
 import java.util.List;
 
 import com.project.pet.model.Vacinacao;
@@ -17,7 +18,7 @@ public interface VacinacaoService {
     
     VacinacaoDTO fetchVacinacao(Long id);
 
-    Vacinacao updateVacinacao(Vacinacao vacinacao);
+    Vacinacao updateVacinacao(VacinacaoUpdateDTO vacinacao);
 
     void deleteVacinacaoById(Long Id);
 }

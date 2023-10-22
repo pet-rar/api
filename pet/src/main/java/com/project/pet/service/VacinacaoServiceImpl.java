@@ -1,10 +1,12 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.Animal.AnimalDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoUpdateDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class VacinacaoServiceImpl implements VacinacaoService{
     
     @Override
     public Vacinacao saveVacinacao(VacinacaoSaveDTO vacinacao) {
-         Optional<Animal> animal = animalRepository.findById((long) vacinacao.id_animal());
+        Optional<Animal> animal = animalRepository.findById((long) vacinacao.id_animal());
         Animal animalEntity = new Animal(animal);
 
         Vacinacao vacinacaoEntity = new Vacinacao(vacinacao);
@@ -74,8 +76,14 @@ public class VacinacaoServiceImpl implements VacinacaoService{
     }
 
     @Override
-    public Vacinacao updateVacinacao(Vacinacao vacinacao) {
-        return vacinacaoRepository.save(vacinacao);
+    public Vacinacao updateVacinacao(VacinacaoUpdateDTO vacinacao) {
+        AnimalDTO animal = animalRepository.findAnimal((long) vacinacao.id_animal());
+        
+        Animal animalEntity = new Animal(animal);
+        
+        Vacinacao vacinacaoEntity = new Vacinacao(vacinacao, animalEntity);
+        
+        return vacinacaoRepository.save(vacinacaoEntity);
     }
 
     @Override

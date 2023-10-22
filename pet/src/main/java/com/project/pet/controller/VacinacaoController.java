@@ -4,6 +4,7 @@ import com.project.pet.dto.Vacinacao.VacinacaoDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllByCpfDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoUpdateDTO;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -49,7 +50,7 @@ public class VacinacaoController {
     }
 
     @PostMapping("/vacinacao/update")
-    public Vacinacao updateVacinacao(@Valid @RequestBody Vacinacao vacinacao) {
+    public Vacinacao updateVacinacao(@Valid @RequestBody VacinacaoUpdateDTO vacinacao) {
         return vacinacaoService.updateVacinacao(vacinacao);
     }
 

@@ -1,6 +1,7 @@
 package com.project.pet.model;
 
 import com.project.pet.dto.Vacinacao.VacinacaoSaveDTO;
+import com.project.pet.dto.Vacinacao.VacinacaoUpdateDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -34,10 +35,22 @@ public class Vacinacao {
     @Enumerated(EnumType.STRING)
     private VacinacaoStatus status;
     
+    public Vacinacao() {
+        super();
+    }
+    
     public Vacinacao(VacinacaoSaveDTO vacinacao) {
         this.descricao = vacinacao.descricao();
         this.data_vacinacao = vacinacao.data_vacinacao();
         this.status = VacinacaoStatus.PENDENTE;
+    }
+    
+    public Vacinacao(VacinacaoUpdateDTO vacinacao, Animal animal) {
+        this.id = vacinacao.id();
+        this.descricao = vacinacao.descricao();
+        this.data_vacinacao = vacinacao.data_vacinacao();
+        this.status = vacinacao.status();
+        this.animal = animal;
     }
 
     public Integer getId() {
