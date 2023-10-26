@@ -23,4 +23,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.data_nascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.id = :id")
     UsuarioDTO findUsuario(@Param("id") long id);
+
+     @Query("SELECT new com.project.pet.dto.Usuario.UsuarioRegisterDTO(u.nome, u.cpf, u.data_nascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.email = :email")
+   	UsuarioDTO findUsuarioByemail(String email);	
 }
