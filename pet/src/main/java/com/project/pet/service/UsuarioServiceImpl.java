@@ -33,8 +33,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 
         Usuario usuarioEntity = new Usuario(usuario.usuario());
 	     
-        if ( usuarioRepository.findUsuarioByemail(usuarioEntity.getEmail()) != null) {
+       UserDetails user = usuarioRepository.findByemail(usuarioEntity.getEmail());
+        
+        if ( user != null) {
         	throw new IllegalArgumentException("O EMAIL informado já está cadastrado!");
+         
         }
 
         usuarioEntity.setSenha(new BCryptPasswordEncoder().encode(usuario.usuario().senha()));
