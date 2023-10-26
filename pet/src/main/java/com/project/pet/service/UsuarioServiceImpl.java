@@ -32,6 +32,10 @@ public class UsuarioServiceImpl implements UsuarioService{
         var enderecoEntity = enderecoRepository.save(endereco);
 
         Usuario usuarioEntity = new Usuario(usuario.usuario());
+	     
+        if ( usuarioRepository.findUsuarioByemail(usuarioEntity.getEmail()) != null) {
+        	throw new IllegalArgumentException("O EMAIL informado já está cadastrado!");
+        }
 
         usuarioEntity.setSenha(new BCryptPasswordEncoder().encode(usuario.usuario().senha()));
         usuarioEntity.setEndereco(enderecoEntity);
