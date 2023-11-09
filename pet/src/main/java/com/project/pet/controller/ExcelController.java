@@ -1,10 +1,8 @@
 package com.project.pet.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +12,15 @@ import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO;
 import com.project.pet.service.AnimalService;
-import com.project.pet.service.CsvService;
+import com.project.pet.service.ExcelService;
 import com.project.pet.service.UsuarioService;
 import com.project.pet.service.VacinacaoService;
 
 @RestController
 @RequestMapping("/export")
-public class CSVController {
+public class ExcelController {
     @Autowired
-    private CsvService csvService;
+    private ExcelService excelService;
     @Autowired
     private VacinacaoService vacinacaoService;
     @Autowired
@@ -31,27 +29,19 @@ public class CSVController {
     private UsuarioService usuarioService;
 
     @GetMapping("/relatorioVacinacao")
-    public ResponseEntity<String> exportVacinacaoToCsv() {
+    public ResponseEntity<String> exportVacinacaoToExcel() {
         List<VacinacaoFindAllDTO> vacinacoes = vacinacaoService.fetchVacinacaoList();
 
-        try {
-            csvService.exportToCsvVacinacao(vacinacoes, "vacinacoes.csv");
-            return ResponseEntity.ok("Arquivo CSV gerado com sucesso.");
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao gerar o arquivo CSV.");
-        }
+        excelService.criarArquivoExcelVacinacoes( "vacinacoes.xls",vacinacoes);
+		return ResponseEntity.ok("Arquivo gerado com sucesso.");
     }
     
     @GetMapping("/relatorioAnimal")
-    public ResponseEntity<String> exportAnimalToCsv() {
+    public ResponseEntity<String> exportAnimalToExcel() {
         List<AnimalFindAllDTO> animais = animalService.fetchAnimalList();
 
-        try {
-            csvService.exportToCsvAnimal(animais, "animais.csv");
-            return ResponseEntity.ok("Arquivo CSV gerado com sucesso.");
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao gerar o arquivo CSV.");
-        }
+        excelService.criarArquivoExcelAnimal( "animais.xls",animais);
+		return ResponseEntity.ok("Arquivo gerado com sucesso.");
     }
     
     @GetMapping("/relatorioUsuario")
@@ -59,11 +49,7 @@ public class CSVController {
     	
         List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
 
-        try {
-            csvService.exportToCsvUsuarios(usuarios, "usuarios.csv");
-            return ResponseEntity.ok("Arquivo CSV gerado com sucesso.");
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao gerar o arquivo CSV.");
-        }
+        excelService.criarArquivoExcelUsuario( "usuarios.xls",usuarios);
+		return ResponseEntity.ok("Arquivo gerado com sucesso.");
     }
 }

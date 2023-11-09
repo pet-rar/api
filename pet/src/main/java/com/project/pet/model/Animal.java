@@ -42,7 +42,8 @@ public class Animal {
     private AnimalTipo tipo;
 
     @Column(length = 100)
-    private String porte;
+    @Enumerated(EnumType.STRING)
+    private AnimalPorte porte;
 
     @Column(length = 100)
     private String cor;
@@ -67,7 +68,7 @@ public class Animal {
     this.peso = animal.get().getPeso();
    }
 
-   public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String cor, Double peso, Usuario usuario) {
+   public Animal(Integer id, String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, AnimalPorte porte, String cor, Double peso, Usuario usuario) {
     super();
     this.id = id;
     this.nome = nome;
@@ -81,7 +82,7 @@ public class Animal {
     this.usuario = usuario;
    }
    
-    public Animal(String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, String porte, String cor, Double peso, Usuario usuario) {
+    public Animal(String nome, LocalDate dataNascimento, String especie, String raca, AnimalTipo tipo, AnimalPorte porte, String cor, Double peso, Usuario usuario) {
     super();
     this.nome = nome;
     this.data_nascimento = dataNascimento;
@@ -163,11 +164,11 @@ public class Animal {
     this.tipo = tipo;
    }
 
-   public String getPorte() {
+   public AnimalPorte getPorte() {
     return porte;
    }
 
-   public void setPorte(String porte) {
+   public void setPorte(AnimalPorte porte) {
     this.porte = porte;
    }
    
