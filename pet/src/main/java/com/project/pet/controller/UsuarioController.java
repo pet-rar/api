@@ -21,6 +21,8 @@ import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
 import com.project.pet.service.UsuarioService;
+import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class UsuarioController {
@@ -35,8 +37,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuario")
-    public List<UsuarioFindAllDTO> listUsuario() {
-        return UsuarioService.fetchUsuarioList();
+    public Map<String, Object> listUsuario(@RequestParam("page") Integer page) {  
+        return UsuarioService.fetchUsuarioListPaginated(page);
     }
 
     @GetMapping("/usuario/{id}")

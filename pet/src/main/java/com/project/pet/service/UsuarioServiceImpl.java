@@ -18,6 +18,11 @@ import com.project.pet.repository.EnderecoRepository;
 import com.project.pet.repository.UsuarioRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -48,8 +53,23 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public List<UsuarioFindAllDTO> fetchUsuarioList() {		
+    public List<UsuarioFindAllDTO> fetchUsuarioList() {
         return usuarioRepository.findAllUsuarios();
+    }
+    
+    @Override
+    public Map<String, Object> fetchUsuarioListPaginated(Integer page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<UsuarioFindAllDTO> usuariosPage = usuarioRepository.findPaginatedUsuarios(pageable);
+
+        List<UsuarioFindAllDTO> content = usuariosPage.getContent();
+        int totalPages = usuariosPage.getTotalPages();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("content", content);        
+        result.put("totalPages", totalPages);
+
+        return result;
     }
 	
     @Override

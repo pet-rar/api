@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.project.pet.dto.Usuario.UsuarioDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
 import com.project.pet.model.Usuario;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
@@ -20,6 +22,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 		
     @Query("SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
     List<UsuarioFindAllDTO> findAllUsuarios();
+    
+    @Query("SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
+    Page<UsuarioFindAllDTO> findPaginatedUsuarios(Pageable pageable);
 
     @Query("SELECT new com.project.pet.dto.Usuario.UsuarioDTO(u.id, u.nome, u.cpf, u.data_nascimento, u.telefone, u.tipo, u.email, e.id, e.logradouro, e.bairro, e.cidade, e.estado, e.cep) FROM Usuario u LEFT JOIN u.endereco e WHERE u.id = :id")
     UsuarioDTO findUsuario(@Param("id") long id);

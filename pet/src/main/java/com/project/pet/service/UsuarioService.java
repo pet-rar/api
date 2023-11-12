@@ -8,11 +8,14 @@ import com.project.pet.dto.Usuario.UsuarioFindByCPFDTO;
 import com.project.pet.dto.Usuario.UsuarioRegisterDTO;
 import com.project.pet.dto.Usuario.UsuarioUpdateDTO;
 import com.project.pet.model.Usuario;
+import java.util.Map;
 
 public interface UsuarioService {
     Usuario saveUsuario(UsuarioRegisterDTO usuario);
 
     List<UsuarioFindAllDTO> fetchUsuarioList();
+    
+    Map<String, Object> fetchUsuarioListPaginated(Integer page);
 
     UsuarioDTO fetchUsuario(long id);
 
