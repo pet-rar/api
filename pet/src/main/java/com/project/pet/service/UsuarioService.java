@@ -23,5 +23,5 @@ public interface UsuarioService {
 
     void deleteUsuarioById(Long Id);
 	
-    List<UsuarioFindAllDTO> findCPF(UsuarioFindByCPFDTO cpf);
+    Map<String, Object> findCPF(UsuarioFindByCPFDTO dto);
 }

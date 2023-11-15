@@ -18,7 +18,7 @@ import org.springframework.data.domain.Pageable;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByemail(String email);
 
-    List<UsuarioFindAllDTO> findBycpfStartingWith(String cpf);
+    Page<UsuarioFindAllDTO> findBycpfStartingWith(String cpf, Pageable pageable);
 		
     @Query("SELECT new com.project.pet.dto.Usuario.UsuarioFindAllDTO(u.id, u.nome, u.cpf, u.email, u.tipo) FROM Usuario u")
     List<UsuarioFindAllDTO> findAllUsuarios();

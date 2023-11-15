@@ -47,8 +47,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuario/cpf")
-    public List<UsuarioFindAllDTO> findUsuarioByCPF(@Valid @RequestBody UsuarioFindByCPFDTO cpf) {
-        return UsuarioService.findCPF(cpf);
+    public Map<String, Object> findUsuarioByCPF(@Valid @RequestBody UsuarioFindByCPFDTO dto) {
+        return UsuarioService.findCPF(dto);
     }
 
     @PostMapping("/usuario/update")

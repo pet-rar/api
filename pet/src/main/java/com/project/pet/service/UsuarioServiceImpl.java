@@ -112,13 +112,21 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 
     @Override
-    public List<UsuarioFindAllDTO> findCPF(UsuarioFindByCPFDTO cpf) {
-        List<UsuarioFindAllDTO> usuarios = usuarioRepository.findBycpfStartingWith(cpf.cpf());
+    public Map<String, Object> findCPF(UsuarioFindByCPFDTO dto) {
+        Pageable pageable = PageRequest.of(dto.page(), 5);        
+        Page<UsuarioFindAllDTO> usuariosPage = usuarioRepository.findBycpfStartingWith(dto.cpf(), pageable);
         
-        if (usuarios == null) {
-            throw new EntityNotFoundException("Usuario com cpf " + cpf.cpf() + " não encontrado");
+        if (usuariosPage.getContent() == null) {
+            throw new EntityNotFoundException("Usuario com cpf " + dto.cpf() + " não encontrado");
         }
+        
+        List<UsuarioFindAllDTO> content = usuariosPage.getContent();
+        int totalPages = usuariosPage.getTotalPages();
 
-        return usuarios;
+        Map<String, Object> result = new HashMap<>();
+        result.put("content", content);        
+        result.put("totalPages", totalPages);
+
+        return result;
     }
 }
