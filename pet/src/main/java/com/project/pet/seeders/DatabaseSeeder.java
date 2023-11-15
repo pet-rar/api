@@ -1,5 +1,8 @@
 package com.project.pet.seeders;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -17,6 +20,11 @@ import com.project.pet.model.UserTipo;
 import com.project.pet.model.Usuario;
 import com.project.pet.repository.AnimalRepository;
 import com.project.pet.repository.UsuarioRepository;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
@@ -25,26 +33,36 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Autowired
     AnimalRepository animalRepository;
+    
+    private final ObjectMapper objectMapper = new ObjectMapper();    
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseSeeder.class);
 
     @Override
     public void run(String... args) throws Exception {
+        objectMapper.registerModule(new JavaTimeModule());
         seedUsuarios();
-        seedAnimais();
+        seedAnimais();        
     }
 
     private void seedUsuarios() {
         if (usuarioRepository.count() == 0) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate data_nascimento = LocalDate.parse("2000-01-01", formatter);
-
-            UsuarioSaveDTO usuarioSaveDTO = new UsuarioSaveDTO("Admin", "999.999.999-99", data_nascimento, "(99) 99999-9999", UserTipo.FUNCIONARIO, "admin@email.com", "Admin@123");
-            Usuario usuarioSeed = new Usuario(usuarioSaveDTO);
-            usuarioSeed.setSenha(new BCryptPasswordEncoder().encode(usuarioSaveDTO.senha()));
-
-            usuarioRepository.save(usuarioSeed);
+            try {                
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream("usuarios.json");
+                List<UsuarioSaveDTO> usuarios = objectMapper.readValue(inputStream, new TypeReference<List<UsuarioSaveDTO>>() {});
+                
+                logger.info("Number of usuarios read from JSON file: {}", usuarios.size());
+                
+                for (UsuarioSaveDTO usuarioSaveDTO : usuarios) {
+                    Usuario usuarioSeed = new Usuario(usuarioSaveDTO);
+                    usuarioSeed.setSenha(new BCryptPasswordEncoder().encode(usuarioSaveDTO.senha()));
+                    usuarioRepository.save(usuarioSeed);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-        
+      
     private void seedAnimais() {
         if (animalRepository.count() == 0) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

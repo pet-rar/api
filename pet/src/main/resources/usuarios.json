@@ -1,0 +1,281 @@
+[
+  {
+    "nome": "Admin",
+    "cpf": "999.999.999-99",
+    "telefone": "(99)99999-9999",
+    "data_nascimento": "2001-01-01",
+    "tipo": "FUNCIONARIO",
+    "email": "admin@email.com",
+    "senha": "Admin@123"
+  },
+  {
+    "nome": "Cain Griffith",
+    "cpf": "683.642.892-73",
+    "data_nascimento": "1988-10-31",
+    "telefone": "(90)15922-624",
+    "tipo": "CLIENTE",
+    "email": "caingriffith@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Wagner Knowles",
+    "cpf": "192.957.570-83",
+    "data_nascimento": "1986-06-07",
+    "telefone": "(95)44432-975",
+    "tipo": "CLIENTE",
+    "email": "wagnerknowles@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Mollie Hayden",
+    "cpf": "819.324.234-62",
+    "data_nascimento": "2002-08-05",
+    "telefone": "(81)34593-806",
+    "tipo": "CLIENTE",
+    "email": "molliehayden@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Hutchinson Rivers",
+    "cpf": "789.398.968-29",
+    "data_nascimento": "1992-08-03",
+    "telefone": "(87)24943-431",
+    "tipo": "FUNCIONARIO",
+    "email": "hutchinsonrivers@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Dina Calhoun",
+    "cpf": "915.268.786-76",
+    "data_nascimento": "1994-11-30",
+    "telefone": "(91)44142-110",
+    "tipo": "FUNCIONARIO",
+    "email": "dinacalhoun@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Debra Mitchell",
+    "cpf": "547.193.227-72",
+    "data_nascimento": "2013-05-17",
+    "telefone": "(88)45133-828",
+    "tipo": "FUNCIONARIO",
+    "email": "debramitchell@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Talley Wilkinson",
+    "cpf": "347.787.235-27",
+    "data_nascimento": "1980-11-27",
+    "telefone": "(90)14363-230",
+    "tipo": "FUNCIONARIO",
+    "email": "talleywilkinson@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Lee Acosta",
+    "cpf": "865.616.784-96",
+    "data_nascimento": "1974-08-05",
+    "telefone": "(92)45152-239",
+    "tipo": "FUNCIONARIO",
+    "email": "leeacosta@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Stafford Gillespie",
+    "cpf": "286.131.557-52",
+    "data_nascimento": "1982-09-16",
+    "telefone": "(93)74542-127",
+    "tipo": "CLIENTE",
+    "email": "staffordgillespie@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Chrystal Mack",
+    "cpf": "738.222.192-28",
+    "data_nascimento": "1981-12-19",
+    "telefone": "(90)64532-217",
+    "tipo": "FUNCIONARIO",
+    "email": "chrystalmack@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Josephine Bowen",
+    "cpf": "684.566.272-43",
+    "data_nascimento": "1984-02-01",
+    "telefone": "(92)25554-000",
+    "tipo": "CLIENTE",
+    "email": "josephinebowen@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Warner Larsen",
+    "cpf": "278.261.752-43",
+    "data_nascimento": "2008-03-15",
+    "telefone": "(82)94293-633",
+    "tipo": "CLIENTE",
+    "email": "warnerlarsen@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Meyers Maddox",
+    "cpf": "379.338.321-51",
+    "data_nascimento": "2016-01-16",
+    "telefone": "(91)05553-034",
+    "tipo": "CLIENTE",
+    "email": "meyersmaddox@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Hilary Nash",
+    "cpf": "220.180.908-65",
+    "data_nascimento": "2004-02-12",
+    "telefone": "(85)45622-050",
+    "tipo": "FUNCIONARIO",
+    "email": "hilarynash@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Moses Duran",
+    "cpf": "820.519.567-11",
+    "data_nascimento": "1991-08-30",
+    "telefone": "(83)85702-436",
+    "tipo": "FUNCIONARIO",
+    "email": "mosesduran@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Nanette Frost",
+    "cpf": "678.741.772-92",
+    "data_nascimento": "1972-07-29",
+    "telefone": "(93)05002-923",
+    "tipo": "FUNCIONARIO",
+    "email": "nanettefrost@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Walker Waters",
+    "cpf": "981.186.395-58",
+    "data_nascimento": "1987-05-03",
+    "telefone": "(91)25223-638",
+    "tipo": "FUNCIONARIO",
+    "email": "walkerwaters@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Bethany Mercado",
+    "cpf": "815.702.439-85",
+    "data_nascimento": "1981-02-14",
+    "telefone": "(96)64732-160",
+    "tipo": "CLIENTE",
+    "email": "bethanymercado@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Jamie Valencia",
+    "cpf": "130.408.249-52",
+    "data_nascimento": "1991-07-21",
+    "telefone": "(87)34902-393",
+    "tipo": "FUNCIONARIO",
+    "email": "jamievalencia@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Clarissa Pope",
+    "cpf": "565.254.632-27",
+    "data_nascimento": "2001-11-20",
+    "telefone": "(87)15493-766",
+    "tipo": "CLIENTE",
+    "email": "clarissapope@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Forbes Chapman",
+    "cpf": "892.285.258-68",
+    "data_nascimento": "1976-06-25",
+    "telefone": "(83)04013-654",
+    "tipo": "FUNCIONARIO",
+    "email": "forbeschapman@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Morris Hamilton",
+    "cpf": "650.354.673-59",
+    "data_nascimento": "1989-02-18",
+    "telefone": "(99)74402-698",
+    "tipo": "FUNCIONARIO",
+    "email": "morrishamilton@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Marcia Allen",
+    "cpf": "977.286.398-36",
+    "data_nascimento": "1981-02-28",
+    "telefone": "(88)05173-767",
+    "tipo": "FUNCIONARIO",
+    "email": "marciaallen@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Lancaster Leblanc",
+    "cpf": "227.385.521-75",
+    "data_nascimento": "1972-02-12",
+    "telefone": "(93)24293-424",
+    "tipo": "FUNCIONARIO",
+    "email": "lancasterleblanc@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Weber Munoz",
+    "cpf": "344.494.120-71",
+    "data_nascimento": "1978-05-30",
+    "telefone": "(98)05542-350",
+    "tipo": "FUNCIONARIO",
+    "email": "webermunoz@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Lisa Hawkins",
+    "cpf": "929.700.316-63",
+    "data_nascimento": "1977-10-03",
+    "telefone": "(99)25523-586",
+    "tipo": "FUNCIONARIO",
+    "email": "lisahawkins@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Zamora Spence",
+    "cpf": "346.693.635-16",
+    "data_nascimento": "2010-02-21",
+    "telefone": "(92)14703-515",
+    "tipo": "CLIENTE",
+    "email": "zamoraspence@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Trisha Clarke",
+    "cpf": "750.274.850-27",
+    "data_nascimento": "2012-09-23",
+    "telefone": "(96)24043-261",
+    "tipo": "CLIENTE",
+    "email": "trishaclarke@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Hendricks Payne",
+    "cpf": "256.310.403-57",
+    "data_nascimento": "2023-04-19",
+    "telefone": "(94)95362-162",
+    "tipo": "FUNCIONARIO",
+    "email": "hendrickspayne@earthpure.com",
+    "senha": "Teste@123"
+  },
+  {
+    "nome": "Lidia Avery",
+    "cpf": "694.261.205-71",
+    "data_nascimento": "1975-06-22",
+    "telefone": "(88)45293-266",
+    "tipo": "FUNCIONARIO",
+    "email": "lidiaavery@earthpure.com",
+    "senha": "Teste@123"
+  }
+]
