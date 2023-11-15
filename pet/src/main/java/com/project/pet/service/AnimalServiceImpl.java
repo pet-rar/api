@@ -112,14 +112,7 @@ public class AnimalServiceImpl implements AnimalService {
         }
         
         Map<String, Object> result = new HashMap<>();   
-        List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent(); 
-        
-        if (usuarios == null) {
-            result.put("content", List.of());
-            result.put("totalPages", 0);
-            
-            return result;
-        }
+        List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent();
                 
         Page<AnimalFindAllDTO> animaisPage = animalRepository.findAllAnimaisByIdUsuario((long) usuarios.get(0).id(), pageable);        
         result.put("content", animaisPage.getContent());

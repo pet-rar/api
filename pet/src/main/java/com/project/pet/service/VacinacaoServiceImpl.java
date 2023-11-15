@@ -89,13 +89,6 @@ public class VacinacaoServiceImpl implements VacinacaoService{
         
         Map<String, Object> result = new HashMap<>();
         List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent();        
-        
-        if (usuarios == null) {
-            result.put("content", List.of());
-            result.put("totalPages", 0);
-            
-            return result;
-        }
                 
         Page<VacinacaoFindAllDTO> vacinacoesPage = vacinacaoRepository.findAllVacinacoesByIdUsuario((long) usuarios.get(0).id(), pageable);        
                 
