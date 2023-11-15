@@ -21,6 +21,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -83,13 +84,20 @@ public class VacinacaoServiceImpl implements VacinacaoService{
         Pageable pageable = PageRequest.of(dto.page(), 5);        
         Page<UsuarioFindAllDTO> usuariosPage = usuarioRepository.findBycpfStartingWith(dto.cpf(), pageable);
         
-        if (usuariosPage.getContent() == null) {
+        if (!usuariosPage.hasContent()) {
             throw new EntityNotFoundException("Vacinações do tutor com cpf " + dto.cpf() + " não encontrado");
         }
         
         Map<String, Object> result = new HashMap<>();
-        List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent();        
-                
+        
+        if (StringUtils.isEmpty(dto.cpf())) {
+            Page<VacinacaoFindAllDTO> allVacinacoes = vacinacaoRepository.findPaginatedVacinacoes(pageable);
+            result.put("content", allVacinacoes.getContent());
+            result.put("totalPages", allVacinacoes.getTotalPages());
+            return result;
+        }
+        
+        List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent();                
         Page<VacinacaoFindAllDTO> vacinacoesPage = vacinacaoRepository.findAllVacinacoesByIdUsuario((long) usuarios.get(0).id(), pageable);        
                 
         result.put("content", vacinacoesPage.getContent());

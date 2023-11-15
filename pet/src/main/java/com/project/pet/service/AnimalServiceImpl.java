@@ -19,6 +19,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -107,14 +108,22 @@ public class AnimalServiceImpl implements AnimalService {
         Pageable pageable = PageRequest.of(dto.page(), 5);
         Page<UsuarioFindAllDTO> usuariosPage = usuarioRepository.findBycpfStartingWith(dto.cpf(), pageable);
         
-        if (usuariosPage.getContent() == null) {
+        if (!usuariosPage.hasContent()) {
             throw new EntityNotFoundException("Animais do tutor com cpf " + dto.cpf() + " não encontrado");
         }
         
-        Map<String, Object> result = new HashMap<>();   
+        Map<String, Object> result = new HashMap<>();
+        
+        if (StringUtils.isEmpty(dto.cpf())) {
+            Page<AnimalFindAllDTO> allAnimais = animalRepository.findPaginatedAnimais(pageable);
+            result.put("content", allAnimais.getContent());
+            result.put("totalPages", allAnimais.getTotalPages());
+            return result;
+        }
+        
         List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent();
-                
-        Page<AnimalFindAllDTO> animaisPage = animalRepository.findAllAnimaisByIdUsuario((long) usuarios.get(0).id(), pageable);        
+        Page<AnimalFindAllDTO> animaisPage = animalRepository.findAllAnimaisByIdUsuario((long) usuarios.get(0).id(), pageable);    
+        
         result.put("content", animaisPage.getContent());
         result.put("totalPages", animaisPage.getTotalPages());
 
