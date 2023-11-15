@@ -103,19 +103,28 @@ public class AnimalServiceImpl implements AnimalService {
     }
         
     @Override
-    public List<AnimalFindAllDTO> fetchAnimalListByCPF(AnimalFindAllByCpfDTO cpf) {
-        List<UsuarioFindAllDTO> usuarios = usuarioRepository.findBycpfStartingWith(cpf.cpf());        
+    public Map<String, Object> fetchAnimalListByCPF(AnimalFindAllByCpfDTO dto) {
+        Pageable pageable = PageRequest.of(dto.page(), 5);
+        Page<UsuarioFindAllDTO> usuariosPage = usuarioRepository.findBycpfStartingWith(dto.cpf(), pageable);
+        
+        if (usuariosPage.getContent() == null) {
+            throw new EntityNotFoundException("Animais do tutor com cpf " + dto.cpf() + " não encontrado");
+        }
+        
+        Map<String, Object> result = new HashMap<>();   
+        List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent(); 
         
         if (usuarios == null) {
-            throw new EntityNotFoundException("Animais do tutor com cpf " + cpf.cpf() + " não encontrado");
+            result.put("content", List.of());
+            result.put("totalPages", 0);
+            
+            return result;
         }
-        
-        if (usuarios.isEmpty()) {
-            return List.of();
-        }
-        
-        List<AnimalFindAllDTO> animais = animalRepository.findAllAnimaisByIdUsuario((long) usuarios.get(0).id());
+                
+        Page<AnimalFindAllDTO> animaisPage = animalRepository.findAllAnimaisByIdUsuario((long) usuarios.get(0).id(), pageable);        
+        result.put("content", animaisPage.getContent());
+        result.put("totalPages", animaisPage.getTotalPages());
 
-        return animais;
+        return result;
     }
 }

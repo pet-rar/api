@@ -1,3 +1,3 @@
 package com.project.pet.dto.Animal;
 
-public record AnimalFindAllByCpfDTO(String cpf) {}
+public record AnimalFindAllByCpfDTO(String cpf, Integer page) {}

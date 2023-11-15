@@ -25,5 +25,5 @@ public interface AnimalRepository extends JpaRepository<Animal,Long> {
     AnimalDTO findAnimal(@Param("id") long id);
     
     @Query("SELECT new com.project.pet.dto.Animal.AnimalFindAllDTO(a.id, a.nome, a.especie, a.raca, a.usuario.nome) FROM Animal a WHERE a.usuario.id = :id")
-    List<AnimalFindAllDTO> findAllAnimaisByIdUsuario(@Param("id") long id);
+    Page<AnimalFindAllDTO> findAllAnimaisByIdUsuario(@Param("id") long id, Pageable pageable);
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 public interface AnimalService {
     Animal saveAnimal(AnimalSaveDTO animal);
 
-    List<AnimalFindAllDTO> fetchAnimalListByCPF(AnimalFindAllByCpfDTO cpf);
+    Map<String, Object> fetchAnimalListByCPF(AnimalFindAllByCpfDTO dto);
     
     Map<String, Object> fetchAnimalListPaginated(Integer page);
 

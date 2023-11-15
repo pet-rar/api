@@ -43,8 +43,8 @@ public class AnimalController {
     }
 
     @PostMapping("/animal/cpf")
-    public List<AnimalFindAllDTO> listAnimalByCPF(@Valid @RequestBody AnimalFindAllByCpfDTO cpf) {
-        return AnimalService.fetchAnimalListByCPF(cpf);
+    public Map<String, Object> listAnimalByCPF(@Valid @RequestBody AnimalFindAllByCpfDTO dto) {
+        return AnimalService.fetchAnimalListByCPF(dto);
     }
 
     @PostMapping("/animal/update")
