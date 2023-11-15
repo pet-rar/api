@@ -1,6 +1,7 @@
 package com.project.pet.model;
 
 import com.project.pet.dto.Animal.AnimalDTO;
+import com.project.pet.dto.Animal.AnimalSaveDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -106,6 +107,19 @@ public class Animal {
     this.porte = animal.porte();
     this.cor = animal.cor();
     this.peso = animal.peso();
+   }
+   
+   public Animal(AnimalSaveDTO animal, Usuario usuario) {
+       super();
+       this.nome = animal.nome(); 
+       this.data_nascimento = animal.data_nascimento();
+       this.especie = animal.especie();
+       this.raca = animal.raca();
+       this.tipo = animal.tipo();
+       this.porte = animal.porte();
+       this.cor = animal.cor();
+       this.peso = animal.peso();
+       this.usuario = usuario;
    }
 
    public Integer getId() {

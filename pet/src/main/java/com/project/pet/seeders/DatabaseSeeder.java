@@ -3,6 +3,8 @@ package com.project.pet.seeders;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.project.pet.dto.Animal.AnimalSaveDTO;
+import com.project.pet.dto.Usuario.UsuarioDTO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -23,8 +25,6 @@ import com.project.pet.repository.UsuarioRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
@@ -35,13 +35,12 @@ public class DatabaseSeeder implements CommandLineRunner {
     AnimalRepository animalRepository;
     
     private final ObjectMapper objectMapper = new ObjectMapper();    
-    private static final Logger logger = LoggerFactory.getLogger(DatabaseSeeder.class);
-
+    
     @Override
     public void run(String... args) throws Exception {
         objectMapper.registerModule(new JavaTimeModule());
         seedUsuarios();
-        seedAnimais();        
+        seedAnimais();
     }
 
     private void seedUsuarios() {
@@ -50,8 +49,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 InputStream inputStream = getClass().getClassLoader().getResourceAsStream("usuarios.json");
                 List<UsuarioSaveDTO> usuarios = objectMapper.readValue(inputStream, new TypeReference<List<UsuarioSaveDTO>>() {});
                 
-                logger.info("Number of usuarios read from JSON file: {}", usuarios.size());
-                
+                                
                 for (UsuarioSaveDTO usuarioSaveDTO : usuarios) {
                     Usuario usuarioSeed = new Usuario(usuarioSaveDTO);
                     usuarioSeed.setSenha(new BCryptPasswordEncoder().encode(usuarioSaveDTO.senha()));
@@ -62,18 +60,23 @@ public class DatabaseSeeder implements CommandLineRunner {
             }
         }
     }
-      
+    
     private void seedAnimais() {
         if (animalRepository.count() == 0) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate data_nascimento = LocalDate.parse("2000-01-01", formatter);
-
-            UsuarioSaveWithIdDTO usuario = new UsuarioSaveWithIdDTO(1, "Admin", "999.999.999-99", data_nascimento, "(99) 99999-9999", UserTipo.FUNCIONARIO, "admin@email.com", "Admin@123");
-            Usuario usuarioSeed = new Usuario(usuario);
-
-            Animal animalSeed = new Animal(1, "Animal", data_nascimento, "especie", "raca", AnimalTipo.MASCULINO, AnimalPorte.MEDIO, "cor", 5.5, usuarioSeed);
-
-            animalRepository.save(animalSeed);
+            try {                
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream("animais.json");
+                List<AnimalSaveDTO> animais = objectMapper.readValue(inputStream, new TypeReference<List<AnimalSaveDTO>>() {});                
+                                
+                for (AnimalSaveDTO animalSaveDTO : animais) {
+                    UsuarioDTO usuarioDTO = usuarioRepository.findUsuario(animalSaveDTO.tutor_id());
+                    Usuario usuario = new Usuario(usuarioDTO);
+                    Animal animalSeed = new Animal(animalSaveDTO, usuario);
+                    
+                    animalRepository.save(animalSeed);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

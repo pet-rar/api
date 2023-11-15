@@ -1,5 +1,6 @@
 package com.project.pet.model;
 
+import com.project.pet.dto.Usuario.UsuarioDTO;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -84,6 +85,17 @@ public class Usuario implements UserDetails {
         this.id = usuario.id();
         this.nome = usuario.nome();
         this.senha = usuario.senha();
+        this.data_nascimento = usuario.data_nascimento();
+        this.tipo = usuario.tipo();
+        this.telefone = usuario.telefone();
+        this.cpf = usuario.cpf();
+        this.email = usuario.email();
+    }
+    
+    public Usuario(UsuarioDTO usuario) {
+        super();
+        this.id = usuario.id();
+        this.nome = usuario.nome();        
         this.data_nascimento = usuario.data_nascimento();
         this.tipo = usuario.tipo();
         this.telefone = usuario.telefone();
