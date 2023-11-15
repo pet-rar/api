@@ -79,20 +79,30 @@ public class VacinacaoServiceImpl implements VacinacaoService{
     }
     
     @Override
-    public List<VacinacaoFindAllDTO> fetchVacinacaoListByCPF(VacinacaoFindAllByCpfDTO cpf) {
-        List<UsuarioFindAllDTO> usuarios = usuarioRepository.findBycpfStartingWith(cpf.cpf());
+    public Map<String, Object> fetchVacinacaoListByCPF(VacinacaoFindAllByCpfDTO dto) {
+        Pageable pageable = PageRequest.of(dto.page(), 5);        
+        Page<UsuarioFindAllDTO> usuariosPage = usuarioRepository.findBycpfStartingWith(dto.cpf(), pageable);
+        
+        if (usuariosPage.getContent() == null) {
+            throw new EntityNotFoundException("Vacinações do tutor com cpf " + dto.cpf() + " não encontrado");
+        }
+        
+        Map<String, Object> result = new HashMap<>();
+        List<UsuarioFindAllDTO> usuarios = usuariosPage.getContent();        
         
         if (usuarios == null) {
-            throw new EntityNotFoundException("Vacinações do tutor com cpf " + cpf.cpf() + " não encontrado");
+            result.put("content", List.of());
+            result.put("totalPages", 0);
+            
+            return result;
         }
+                
+        Page<VacinacaoFindAllDTO> vacinacoesPage = vacinacaoRepository.findAllVacinacoesByIdUsuario((long) usuarios.get(0).id(), pageable);        
+                
+        result.put("content", vacinacoesPage.getContent());
+        result.put("totalPages", vacinacoesPage.getTotalPages());
         
-        if (usuarios.isEmpty()) {
-            return List.of();
-        }
-        
-        List<VacinacaoFindAllDTO> vacinacoes = vacinacaoRepository.findAllVacinacoesByIdUsuario((long) usuarios.get(0).id());
-
-        return vacinacoes;
+        return result;
     }
 
     @Override

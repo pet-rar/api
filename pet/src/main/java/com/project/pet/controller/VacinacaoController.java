@@ -47,8 +47,8 @@ public class VacinacaoController {
     }
     
     @PostMapping("/vacinacao/cpf")
-    public List<VacinacaoFindAllDTO> listVacinacaoByCPF(@Valid @RequestBody VacinacaoFindAllByCpfDTO cpf) {
-        return vacinacaoService.fetchVacinacaoListByCPF(cpf);
+    public Map<String, Object> listVacinacaoByCPF(@Valid @RequestBody VacinacaoFindAllByCpfDTO dto) {
+        return vacinacaoService.fetchVacinacaoListByCPF(dto);
     }
 
     @PostMapping("/vacinacao/update")

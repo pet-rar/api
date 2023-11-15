@@ -17,7 +17,7 @@ public interface VacinacaoService {
 
     List<VacinacaoFindAllDTO> fetchVacinacaoList();
     
-    List<VacinacaoFindAllDTO> fetchVacinacaoListByCPF(VacinacaoFindAllByCpfDTO cpf);
+    Map<String, Object> fetchVacinacaoListByCPF(VacinacaoFindAllByCpfDTO dto);
     
     VacinacaoDTO fetchVacinacao(Long id);
 

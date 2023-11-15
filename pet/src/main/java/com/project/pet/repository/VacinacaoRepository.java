@@ -25,5 +25,5 @@ public interface VacinacaoRepository extends JpaRepository<Vacinacao, Long> {
     VacinacaoDTO findVacinacao(@Param("id") long id);
     
     @Query("SELECT new com.project.pet.dto.Vacinacao.VacinacaoFindAllDTO(v.id, a.nome, v.descricao, v.data_vacinacao, v.status) FROM Vacinacao v JOIN v.animal a WHERE a.usuario.id = :id")
-    List<VacinacaoFindAllDTO> findAllVacinacoesByIdUsuario(@Param("id") long id);
+    Page<VacinacaoFindAllDTO> findAllVacinacoesByIdUsuario(@Param("id") long id, Pageable page);
 }
