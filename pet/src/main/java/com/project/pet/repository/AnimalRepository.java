@@ -9,10 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.project.pet.model.Animal;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal,Long> {   
+    @Query("SELECT new com.project.pet.dto.Animal.AnimalFindAllDTO(a.id, a.nome, a.especie, a.raca, a.usuario.nome) FROM Animal a")
+    Page<AnimalFindAllDTO> findPaginatedAnimais(Pageable pageable);
+    
     @Query("SELECT new com.project.pet.dto.Animal.AnimalFindAllDTO(a.id, a.nome, a.especie, a.raca, a.usuario.nome) FROM Animal a")
     List<AnimalFindAllDTO> findAllAnimais();
     

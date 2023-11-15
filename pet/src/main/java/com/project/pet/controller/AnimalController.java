@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pet.model.Animal;
 import com.project.pet.service.AnimalService;
+import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class AnimalController {
@@ -31,8 +33,8 @@ public class AnimalController {
     }
 
     @GetMapping("/animal")
-    public List<AnimalFindAllDTO> listAnimal() {
-           return AnimalService.fetchAnimalList();
+    public Map<String, Object> listAnimal(@RequestParam("page") Integer page) {
+           return AnimalService.fetchAnimalListPaginated(page);
     }
     
     @GetMapping("/animal/{id}")

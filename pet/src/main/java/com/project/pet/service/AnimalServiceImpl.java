@@ -16,7 +16,12 @@ import com.project.pet.model.Usuario;
 import com.project.pet.repository.AnimalRepository;
 import com.project.pet.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class AnimalServiceImpl implements AnimalService {	
@@ -41,6 +46,21 @@ public class AnimalServiceImpl implements AnimalService {
         Animal animalEntity = new Animal(animal.nome(), animal.data_nascimento(), animal.especie(), animal.raca(), animal.tipo(), animal.porte(), animal.cor(), animal.peso(), usuario);
     	    	 
         return animalRepository.save(animalEntity);
+    }
+    
+    @Override
+    public Map<String, Object> fetchAnimalListPaginated(Integer page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<AnimalFindAllDTO> animaisPage = animalRepository.findPaginatedAnimais(pageable);
+
+        List<AnimalFindAllDTO> content = animaisPage.getContent();
+        int totalPages = animaisPage.getTotalPages();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("content", content);        
+        result.put("totalPages", totalPages);
+
+        return result;
     }
 
     @Override

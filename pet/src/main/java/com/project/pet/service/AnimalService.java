@@ -8,11 +8,14 @@ import com.project.pet.dto.Animal.AnimalUpdateDTO;
 import java.util.List;
 
 import com.project.pet.model.Animal;
+import java.util.Map;
 
 public interface AnimalService {
     Animal saveAnimal(AnimalSaveDTO animal);
 
     List<AnimalFindAllDTO> fetchAnimalListByCPF(AnimalFindAllByCpfDTO cpf);
+    
+    Map<String, Object> fetchAnimalListPaginated(Integer page);
 
     List<AnimalFindAllDTO> fetchAnimalList();
     
