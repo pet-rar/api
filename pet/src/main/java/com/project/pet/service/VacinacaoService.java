@@ -8,9 +8,12 @@ import com.project.pet.dto.Vacinacao.VacinacaoUpdateDTO;
 import java.util.List;
 
 import com.project.pet.model.Vacinacao;
+import java.util.Map;
 
 public interface VacinacaoService {
-    Vacinacao saveVacinacao(VacinacaoSaveDTO vacinacao);
+    Vacinacao saveVacinacao(VacinacaoSaveDTO vacinacao);    
+    
+    Map<String, Object> fetchVacinacaoListPaginated(Integer page);
 
     List<VacinacaoFindAllDTO> fetchVacinacaoList();
     

@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pet.model.Vacinacao;
 import com.project.pet.service.VacinacaoService;
+import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class VacinacaoController {
@@ -35,8 +37,8 @@ public class VacinacaoController {
     }
 
     @GetMapping("/vacinacao")
-    public List<VacinacaoFindAllDTO> listVacinacao() {
-        return vacinacaoService.fetchVacinacaoList();
+    public Map<String, Object> listVacinacao(@RequestParam("page") Integer page) {
+        return vacinacaoService.fetchVacinacaoListPaginated(page);
     }
     
     @GetMapping("/vacinacao/{id}")

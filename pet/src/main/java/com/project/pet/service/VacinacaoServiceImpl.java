@@ -18,7 +18,12 @@ import com.project.pet.repository.AnimalRepository;
 import com.project.pet.repository.UsuarioRepository;
 import com.project.pet.repository.VacinacaoRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class VacinacaoServiceImpl implements VacinacaoService{
@@ -40,6 +45,21 @@ public class VacinacaoServiceImpl implements VacinacaoService{
         vacinacaoEntity.setAnimal(animalEntity);
         
         return vacinacaoRepository.save(vacinacaoEntity);
+    }
+    
+    @Override
+    public Map<String, Object> fetchVacinacaoListPaginated(Integer page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<VacinacaoFindAllDTO> vacinacoesPage = vacinacaoRepository.findPaginatedVacinacoes(pageable);
+
+        List<VacinacaoFindAllDTO> content = vacinacoesPage.getContent();
+        int totalPages = vacinacoesPage.getTotalPages();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("content", content);        
+        result.put("totalPages", totalPages);
+
+        return result;
     }
 
     @Override
