@@ -45,6 +45,12 @@ public class Vacinacao {
         this.status = VacinacaoStatus.PENDENTE;
     }
     
+    public Vacinacao(VacinacaoSaveDTO vacinacao, Animal animal) {
+        this.descricao = vacinacao.descricao();
+        this.data_vacinacao = vacinacao.data_vacinacao();        
+        this.animal = animal;
+    }
+    
     public Vacinacao(VacinacaoUpdateDTO vacinacao, Animal animal) {
         this.id = vacinacao.id();
         this.descricao = vacinacao.descricao();
