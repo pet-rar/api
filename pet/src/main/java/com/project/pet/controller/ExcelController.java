@@ -17,39 +17,54 @@ import com.project.pet.service.UsuarioService;
 import com.project.pet.service.VacinacaoService;
 
 @RestController
-@RequestMapping("/export")
 public class ExcelController {
-    @Autowired
-    private ExcelService excelService;
-    @Autowired
-    private VacinacaoService vacinacaoService;
-    @Autowired
-    private AnimalService animalService;
-    @Autowired
-    private UsuarioService usuarioService;
+	@Autowired
+	private ExcelService excelService;
+	@Autowired
+	private VacinacaoService vacinacaoService;
+	@Autowired
+	private AnimalService animalService;
+	@Autowired
+	private UsuarioService usuarioService;
+	 @GetMapping("/export/relatorioVacinacao")
+	    public ResponseEntity<ByteArrayResource> exportVacinacaoToExcel() {
+	        List<VacinacaoFindAllDTO> vacinacoes = vacinacaoService.fetchVacinacaoList();
+	        byte[] excelBytes = excelService.criarArquivoExcelVacinacoes("vacinacoes.xls", vacinacoes);
 
-    @GetMapping("/relatorioVacinacao")
-    public ResponseEntity<String> exportVacinacaoToExcel() {
-        List<VacinacaoFindAllDTO> vacinacoes = vacinacaoService.fetchVacinacaoList();
+	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
 
-        excelService.criarArquivoExcelVacinacoes( "vacinacoes.xls",vacinacoes);
-		return ResponseEntity.ok("Arquivo gerado com sucesso.");
-    }
-    
-    @GetMapping("/relatorioAnimal")
-    public ResponseEntity<String> exportAnimalToExcel() {
-        List<AnimalFindAllDTO> animais = animalService.fetchAnimalList();
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=vacinacoes.xls")
+	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .contentLength(excelBytes.length)
+	                .body(resource);
+	    }
 
-        excelService.criarArquivoExcelAnimal( "animais.xls",animais);
-		return ResponseEntity.ok("Arquivo gerado com sucesso.");
-    }
-    
-    @GetMapping("/relatorioUsuario")
-    public ResponseEntity<String> exportUsuarioToCsv() {
-    	
-        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
+	    @GetMapping("/export/relatorioAnimal")
+	    public ResponseEntity<ByteArrayResource> exportAnimalToExcel() {
+	        List<AnimalFindAllDTO> animais = animalService.fetchAnimalList();
+	        byte[] excelBytes = excelService.criarArquivoExcelAnimal("animais.xls", animais);
 
-        excelService.criarArquivoExcelUsuario( "usuarios.xls",usuarios);
-		return ResponseEntity.ok("Arquivo gerado com sucesso.");
-    }
-}
+	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
+
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=animais.xls")
+	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .contentLength(excelBytes.length)
+	                .body(resource);
+	    }
+
+	    @GetMapping("/export/relatorioUsuario")
+	    public ResponseEntity<ByteArrayResource> exportUsuarioToCsv() {
+	        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
+	        byte[] excelBytes = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);
+
+	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
+
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=usuarios.xls")
+	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .contentLength(excelBytes.length)
+	                .body(resource);
+	    }
+	}
