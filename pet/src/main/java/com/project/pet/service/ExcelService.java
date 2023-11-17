@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -20,87 +21,83 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ExcelService {
-
-	public void criarArquivoExcelVacinacoes(final String nomeArquivo, List<VacinacaoFindAllDTO> vacinacoes) {
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-		try (var workbook = new XSSFWorkbook(); var outputStream = new FileOutputStream(nomeArquivo)) {
-			var planilha = workbook.createSheet("Lista de Vacinações");
-			int numeroDaLinha = 0;
-
-			adicionarCabecalhoVacinacao(planilha, numeroDaLinha++);
-
-			for (VacinacaoFindAllDTO vacinacao : vacinacoes) {
-				var linha = planilha.createRow(numeroDaLinha++);
-				adicionarCelula(linha, 0, vacinacao.id());
-				adicionarCelula(linha, 1, vacinacao.animal_nome());
-				adicionarCelula(linha, 2, vacinacao.descricao());
-				adicionarCelula(linha, 3, String.valueOf(vacinacao.status()));
-				adicionarCelula(linha, 4, vacinacao.data_vacinacao().format(formatter));
-			}
-
-			workbook.write(outputStream);
-		} catch (FileNotFoundException e) {
-			System.err.println("Arquivo não encontrado:" + nomeArquivo);
-		} catch (IOException e) {
-			System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-		}
-
-	}
 	
-	public void criarArquivoExcelAnimal(final String nomeArquivo, List<AnimalFindAllDTO> animais) {
+	  public byte[] criarArquivoExcelVacinacoes(final String nomeArquivo, List<VacinacaoFindAllDTO> vacinacoes) {
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
+	        try (var workbook = new XSSFWorkbook(); var outputStream = new ByteArrayOutputStream()) {
+	            var planilha = workbook.createSheet("Lista de Vacinações");
+	            int numeroDaLinha = 0;
 
-		try (var workbook = new XSSFWorkbook(); var outputStream = new FileOutputStream(nomeArquivo)) {
-			var planilha = workbook.createSheet("Lista de Vacinações");
-			int numeroDaLinha = 0;
+	            adicionarCabecalhoVacinacao(planilha, numeroDaLinha++);
 
-			adicionarCabecalhoAnimal(planilha, numeroDaLinha++);
+	            for (VacinacaoFindAllDTO vacinacao : vacinacoes) {
+	                var linha = planilha.createRow(numeroDaLinha++);
+	                adicionarCelula(linha, 0, vacinacao.id());
+	                adicionarCelula(linha, 1, vacinacao.animal_nome());
+	                adicionarCelula(linha, 2, vacinacao.descricao());
+	                adicionarCelula(linha, 3, String.valueOf(vacinacao.status()));
+	                adicionarCelula(linha, 4, vacinacao.data_vacinacao().format(formatter));
+	            }
 
-			for (AnimalFindAllDTO animal : animais) {
-				var linha = planilha.createRow(numeroDaLinha++);
-				adicionarCelula(linha, 0, animal.id());
-				adicionarCelula(linha, 1, animal.nome());
-				adicionarCelula(linha, 2, animal.especie());
-				adicionarCelula(linha, 3, animal.raca());
-				adicionarCelula(linha, 4, animal.tutor_nome());
-			}
+	            workbook.write(outputStream);
+	            return outputStream.toByteArray();
+	        } catch (IOException e) {
+	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
+	            return new byte[0];
+	        }
+	    }
 
-			workbook.write(outputStream);
-		} catch (FileNotFoundException e) {
-			System.err.println("Arquivo não encontrado:" + nomeArquivo);
-		} catch (IOException e) {
-			System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-		}
-
-	}
 	
-	public void criarArquivoExcelUsuario(final String nomeArquivo, List<UsuarioFindAllDTO> usuarios) {
+	    public byte[] criarArquivoExcelAnimal(final String nomeArquivo, List<AnimalFindAllDTO> animais) {
+	        try (var workbook = new XSSFWorkbook(); var outputStream = new ByteArrayOutputStream()) {
+	            var planilha = workbook.createSheet("Lista de Animais");
+	            int numeroDaLinha = 0;
 
+	            adicionarCabecalhoAnimal(planilha, numeroDaLinha++);
 
-		try (var workbook = new XSSFWorkbook(); var outputStream = new FileOutputStream(nomeArquivo)) {
-			var planilha = workbook.createSheet("Lista de Vacinações");
-			int numeroDaLinha = 0;
+	            for (AnimalFindAllDTO animal : animais) {
+	                var linha = planilha.createRow(numeroDaLinha++);
+	                adicionarCelula(linha, 0, animal.id());
+	                adicionarCelula(linha, 1, animal.nome());
+	                adicionarCelula(linha, 2, animal.especie());
+	                adicionarCelula(linha, 3, animal.raca());
+	                adicionarCelula(linha, 4, animal.tutor_nome());
+	            }
 
-			adicionarCabecalhoUsuario(planilha, numeroDaLinha++);
+	            workbook.write(outputStream);
+	            return outputStream.toByteArray();
+	        } catch (IOException e) {
+	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
+	            return new byte[0];
+	        }
+	    }
 
-			for (UsuarioFindAllDTO usuario : usuarios) {
-				var linha = planilha.createRow(numeroDaLinha++);
-				adicionarCelula(linha, 0, usuario.id());
-				adicionarCelula(linha, 1, usuario.nome());
-				adicionarCelula(linha, 2, usuario.email());
-				adicionarCelula(linha, 3, usuario.cpf());
-				adicionarCelula(linha, 4, String.valueOf(usuario.tipo()));
-			}
+	
+	
+	    public byte[] criarArquivoExcelUsuario(final String nomeArquivo, List<UsuarioFindAllDTO> usuarios) {
+	        try (var workbook = new XSSFWorkbook(); var outputStream = new ByteArrayOutputStream()) {
+	            var planilha = workbook.createSheet("Lista de Usuarios");
+	            int numeroDaLinha = 0;
 
-			workbook.write(outputStream);
-		} catch (FileNotFoundException e) {
-			System.err.println("Arquivo não encontrado:" + nomeArquivo);
-		} catch (IOException e) {
-			System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-		}
+	            adicionarCabecalhoUsuario(planilha, numeroDaLinha++);
 
-	}
+	            for (UsuarioFindAllDTO usuario : usuarios) {
+	                var linha = planilha.createRow(numeroDaLinha++);
+	                adicionarCelula(linha, 0, usuario.id());
+	                adicionarCelula(linha, 1, usuario.nome());
+	                adicionarCelula(linha, 2, usuario.email());
+	                adicionarCelula(linha, 3, usuario.cpf());
+	                adicionarCelula(linha, 4, String.valueOf(usuario.tipo()));
+	            }
+
+	            workbook.write(outputStream);
+	            return outputStream.toByteArray();
+	        } catch (IOException e) {
+	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
+	            return new byte[0];
+	        }
+	    }
 
 	private void adicionarCabecalhoVacinacao(XSSFSheet planilha, int numeroLinha) {
 		var linha = planilha.createRow(numeroLinha);
