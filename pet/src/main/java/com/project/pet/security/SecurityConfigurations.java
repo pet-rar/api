@@ -40,6 +40,8 @@ public class SecurityConfigurations {
                 .requestMatchers(HttpMethod.POST, "/endereco").hasRole("FUNCIONARIO")
                 .requestMatchers(HttpMethod.POST, "/usuario").hasRole("FUNCIONARIO")
                 .requestMatchers(HttpMethod.POST, "/vacinacao").hasRole("FUNCIONARIO")
+                .requestMatchers(HttpMethod.POST, "/export").hasRole("FUNCIONARIO")
+                .requestMatchers(HttpMethod.POST, "/pdf").hasRole("FUNCIONARIO")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) 
