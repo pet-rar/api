@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import com.project.pet.dto.Animal.AnimalFindAllDTO;
 import com.project.pet.dto.Usuario.UsuarioFindAllDTO;
@@ -17,10 +15,10 @@ import com.project.pet.service.AnimalService;
 import com.project.pet.service.ExcelService;
 import com.project.pet.service.UsuarioService;
 import com.project.pet.service.VacinacaoService;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-
-
 
 @RestController
 public class ExcelController {
@@ -32,44 +30,50 @@ public class ExcelController {
 	private AnimalService animalService;
 	@Autowired
 	private UsuarioService usuarioService;
-	 @GetMapping("/export/relatorioVacinacao")
+	 @GetMapping("/export/vacinacoes")
 	    public ResponseEntity<ByteArrayResource> exportVacinacaoToExcel() {
 	        List<VacinacaoFindAllDTO> vacinacoes = vacinacaoService.fetchVacinacaoList();
-	        byte[] excelBytes = excelService.criarArquivoExcelVacinacoes("vacinacoes.xls", vacinacoes);
+	        byte[] excelBytes = excelService.criarArquivoExcelVacinacoes("vacinacoes.xlsx", vacinacoes);
 
 	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
+                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
+                String filename = "vacinacoes_" + currentDate + ".xlsx";
 
 	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=vacinacoes.xls")
-	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+	                .contentType(MediaType.valueOf("application/vnd.ms-excel"))
 	                .contentLength(excelBytes.length)
 	                .body(resource);
 	    }
 
-	    @GetMapping("/export/relatorioAnimal")
+	    @GetMapping("/export/animais")
 	    public ResponseEntity<ByteArrayResource> exportAnimalToExcel() {
 	        List<AnimalFindAllDTO> animais = animalService.fetchAnimalList();
-	        byte[] excelBytes = excelService.criarArquivoExcelAnimal("animais.xls", animais);
+	        byte[] excelBytes = excelService.criarArquivoExcelAnimal("animais.xlsx", animais);
 
 	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
+                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
+                String filename = "animais_" + currentDate + ".xlsx";
 
 	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=animais.xls")
-	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+	                .contentType(MediaType.valueOf("application/vnd.ms-excel"))
 	                .contentLength(excelBytes.length)
 	                .body(resource);
 	    }
 
-	    @GetMapping("/export/relatorioUsuario")
+	    @GetMapping("/export/usuarios")
 	    public ResponseEntity<ByteArrayResource> exportUsuarioToCsv() {
 	        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
-	        byte[] excelBytes = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);
-
+                byte[] excelBytes = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);
+          
 	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
+                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
+                String filename = "usuarios_" + currentDate + ".xlsx";
 
 	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=usuarios.xls")
-	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+	                .contentType(MediaType.valueOf("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 	                .contentLength(excelBytes.length)
 	                .body(resource);
 	    }
