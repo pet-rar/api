@@ -71,11 +71,9 @@ public class ExcelService {
 	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
 	            return new byte[0];
 	        }
-	    }
-
+	    }	
 	
-	
-	    public byte[] criarArquivoExcelUsuario(final String nomeArquivo, List<UsuarioFindAllDTO> usuarios) {
+	    public ByteArrayOutputStream criarArquivoExcelUsuario(final String nomeArquivo, List<UsuarioFindAllDTO> usuarios) {
 	        try (var workbook = new XSSFWorkbook(); var outputStream = new ByteArrayOutputStream()) {
 	            var planilha = workbook.createSheet("Lista de Usuarios");
 	            int numeroDaLinha = 0;
@@ -92,10 +90,10 @@ public class ExcelService {
 	            }
 
 	            workbook.write(outputStream);
-	            return outputStream.toByteArray();
+	            return outputStream;
 	        } catch (IOException e) {
 	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-	            return new byte[0];
+	            return null;
 	        }
 	    }
 

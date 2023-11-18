@@ -15,6 +15,7 @@ import com.project.pet.service.AnimalService;
 import com.project.pet.service.ExcelService;
 import com.project.pet.service.UsuarioService;
 import com.project.pet.service.VacinacaoService;
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import org.springframework.http.HttpHeaders;
@@ -41,7 +42,7 @@ public class ExcelController {
 
 	        return ResponseEntity.ok()
 	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.valueOf("application/vnd.ms-excel"))
+	                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
 	                .contentLength(excelBytes.length)
 	                .body(resource);
 	    }
@@ -57,24 +58,22 @@ public class ExcelController {
 
 	        return ResponseEntity.ok()
 	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.valueOf("application/vnd.ms-excel"))
+	                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
 	                .contentLength(excelBytes.length)
 	                .body(resource);
 	    }
 
 	    @GetMapping("/export/usuarios")
-	    public ResponseEntity<ByteArrayResource> exportUsuarioToCsv() {
+	    public ResponseEntity<byte[]> exportUsuarioToCsv() {
 	        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
-                byte[] excelBytes = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);
-          
-	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
+                ByteArrayOutputStream stream = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);          
+	        
                 String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
                 String filename = "usuarios_" + currentDate + ".xlsx";
 
 	        return ResponseEntity.ok()
 	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.valueOf("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
-	                .contentLength(excelBytes.length)
-	                .body(resource);
+	                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+	                .body(stream.toByteArray());
 	    }
 	}
