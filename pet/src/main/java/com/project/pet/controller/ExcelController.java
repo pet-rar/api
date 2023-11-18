@@ -76,4 +76,22 @@ public class ExcelController {
 	                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 	                .body(stream.toByteArray());
 	    }
+
+			/* INPUTSTREAM TESTE
+			@GetMapping("/export/usuarios")
+	    public ResponseEntity<byte[]> exportUsuarioToCsv() throws IOException {
+	        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
+                InputStream stream = excelService.criarArquivoExcelUsuario("usuarios.xlsx", usuarios);
+                System.out.println(stream);
+                System.out.println("byte" + IOUtils.toByteArray(stream));
+	        
+                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
+                String filename = "usuarios_" + currentDate + ".xlsx";
+
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+	                .contentType(MediaType.APPLICATION_JSON)
+	                .body(IOUtils.toByteArray(stream));
+	    }
+		*/
 	}

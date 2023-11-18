@@ -97,6 +97,33 @@ public class ExcelService {
 	        }
 	    }
 
+				/* INPUTSTREAM TESTE
+				public InputStream criarArquivoExcelUsuario(final String nomeArquivo, List<UsuarioFindAllDTO> usuarios) {
+	        try (var workbook = new XSSFWorkbook(); var outputStream = new FileOutputStream(nomeArquivo)) {
+	            var planilha = workbook.createSheet("Lista de Usuarios");
+	            int numeroDaLinha = 0;
+
+	            adicionarCabecalhoUsuario(planilha, numeroDaLinha++);
+
+	            for (UsuarioFindAllDTO usuario : usuarios) {
+	                var linha = planilha.createRow(numeroDaLinha++);
+	                adicionarCelula(linha, 0, usuario.id());
+	                adicionarCelula(linha, 1, usuario.nome());
+	                adicionarCelula(linha, 2, usuario.email());
+	                adicionarCelula(linha, 3, usuario.cpf());
+	                adicionarCelula(linha, 4, String.valueOf(usuario.tipo()));
+	            }
+
+	            workbook.write(outputStream);
+                    workbook.close();
+                    final InputStream fileInputStream = new FileInputStream(nomeArquivo);
+	            return fileInputStream;
+	        } catch (IOException e) {
+	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
+	            return null;
+	        }
+	    }*/
+
 	private void adicionarCabecalhoVacinacao(XSSFSheet planilha, int numeroLinha) {
 		var linha = planilha.createRow(numeroLinha);
 		adicionarCelula(linha, 0, "Id");
