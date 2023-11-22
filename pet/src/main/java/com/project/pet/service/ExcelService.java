@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExcelService {
 	
-	  public byte[] criarArquivoExcelVacinacoes(final String nomeArquivo, List<VacinacaoFindAllDTO> vacinacoes) {
+	  public ByteArrayOutputStream criarArquivoExcelVacinacoes(final String nomeArquivo, List<VacinacaoFindAllDTO> vacinacoes) {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
 	        try (var workbook = new XSSFWorkbook(); var outputStream = new ByteArrayOutputStream()) {
@@ -41,15 +41,15 @@ public class ExcelService {
 	            }
 
 	            workbook.write(outputStream);
-	            return outputStream.toByteArray();
+	            return outputStream;
 	        } catch (IOException e) {
 	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-	            return new byte[0];
+	            return null;
 	        }
 	    }
 
 	
-	    public byte[] criarArquivoExcelAnimal(final String nomeArquivo, List<AnimalFindAllDTO> animais) {
+	    public ByteArrayOutputStream criarArquivoExcelAnimal(final String nomeArquivo, List<AnimalFindAllDTO> animais) {
 	        try (var workbook = new XSSFWorkbook(); var outputStream = new ByteArrayOutputStream()) {
 	            var planilha = workbook.createSheet("Lista de Animais");
 	            int numeroDaLinha = 0;
@@ -66,10 +66,10 @@ public class ExcelService {
 	            }
 
 	            workbook.write(outputStream);
-	            return outputStream.toByteArray();
+	            return outputStream;
 	        } catch (IOException e) {
 	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-	            return new byte[0];
+	            return null;
 	        }
 	    }	
 	
@@ -96,33 +96,6 @@ public class ExcelService {
 	            return null;
 	        }
 	    }
-
-				/* INPUTSTREAM TESTE
-				public InputStream criarArquivoExcelUsuario(final String nomeArquivo, List<UsuarioFindAllDTO> usuarios) {
-	        try (var workbook = new XSSFWorkbook(); var outputStream = new FileOutputStream(nomeArquivo)) {
-	            var planilha = workbook.createSheet("Lista de Usuarios");
-	            int numeroDaLinha = 0;
-
-	            adicionarCabecalhoUsuario(planilha, numeroDaLinha++);
-
-	            for (UsuarioFindAllDTO usuario : usuarios) {
-	                var linha = planilha.createRow(numeroDaLinha++);
-	                adicionarCelula(linha, 0, usuario.id());
-	                adicionarCelula(linha, 1, usuario.nome());
-	                adicionarCelula(linha, 2, usuario.email());
-	                adicionarCelula(linha, 3, usuario.cpf());
-	                adicionarCelula(linha, 4, String.valueOf(usuario.tipo()));
-	            }
-
-	            workbook.write(outputStream);
-                    workbook.close();
-                    final InputStream fileInputStream = new FileInputStream(nomeArquivo);
-	            return fileInputStream;
-	        } catch (IOException e) {
-	            System.err.println("Erro ao processar o arquivo: " + nomeArquivo);
-	            return null;
-	        }
-	    }*/
 
 	private void adicionarCabecalhoVacinacao(XSSFSheet planilha, int numeroLinha) {
 		var linha = planilha.createRow(numeroLinha);

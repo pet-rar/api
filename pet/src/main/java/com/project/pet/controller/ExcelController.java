@@ -18,80 +18,81 @@ import com.project.pet.service.VacinacaoService;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import org.springframework.http.HttpHeaders;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.MediaType;
 
 @RestController
 public class ExcelController {
-	@Autowired
-	private ExcelService excelService;
-	@Autowired
-	private VacinacaoService vacinacaoService;
-	@Autowired
-	private AnimalService animalService;
-	@Autowired
-	private UsuarioService usuarioService;
-	 @GetMapping("/export/vacinacoes")
-	    public ResponseEntity<ByteArrayResource> exportVacinacaoToExcel() {
-	        List<VacinacaoFindAllDTO> vacinacoes = vacinacaoService.fetchVacinacaoList();
-	        byte[] excelBytes = excelService.criarArquivoExcelVacinacoes("vacinacoes.xlsx", vacinacoes);
+    @Autowired
+    private ExcelService excelService;
+    @Autowired
+    private VacinacaoService vacinacaoService;
+    @Autowired
+    private AnimalService animalService;
+    @Autowired
+    private UsuarioService usuarioService;
 
-	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
-                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
-                String filename = "vacinacoes_" + currentDate + ".xlsx";
+    @GetMapping("/export/vacinacoes")
+    public ResponseEntity<Map<String, String>> exportVacinacaoToExcel() {
+        List<VacinacaoFindAllDTO> vacinacoes = vacinacaoService.fetchVacinacaoList();
+        ByteArrayOutputStream stream = excelService.criarArquivoExcelVacinacoes("vacinacoes.xls", vacinacoes);
 
-	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-	                .contentLength(excelBytes.length)
-	                .body(resource);
-	    }
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String filename = "vacinacoes_" + currentDate + ".xlsx";
 
-	    @GetMapping("/export/animais")
-	    public ResponseEntity<ByteArrayResource> exportAnimalToExcel() {
-	        List<AnimalFindAllDTO> animais = animalService.fetchAnimalList();
-	        byte[] excelBytes = excelService.criarArquivoExcelAnimal("animais.xlsx", animais);
+        byte[] excelData = stream.toByteArray();
+        String base64Encoded = Base64.getEncoder().encodeToString(excelData);
 
-	        ByteArrayResource resource = new ByteArrayResource(excelBytes);
-                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
-                String filename = "animais_" + currentDate + ".xlsx";
 
-	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-	                .contentLength(excelBytes.length)
-	                .body(resource);
-	    }
+        Map<String, String> response = new HashMap<>();
+        response.put("filename", filename);
+        response.put("content", base64Encoded);
 
-	    @GetMapping("/export/usuarios")
-	    public ResponseEntity<byte[]> exportUsuarioToCsv() {
-	        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
-                ByteArrayOutputStream stream = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);          
-	        
-                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
-                String filename = "usuarios_" + currentDate + ".xlsx";
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
 
-	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
-	                .body(stream.toByteArray());
-	    }
+    @GetMapping("/export/animais")
+    public ResponseEntity<Map<String, String>> exportAnimalToExcel() {
+        List<AnimalFindAllDTO> animais = animalService.fetchAnimalList();
+        ByteArrayOutputStream stream = excelService.criarArquivoExcelAnimal("animais.xls", animais);
 
-			/* INPUTSTREAM TESTE
-			@GetMapping("/export/usuarios")
-	    public ResponseEntity<byte[]> exportUsuarioToCsv() throws IOException {
-	        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
-                InputStream stream = excelService.criarArquivoExcelUsuario("usuarios.xlsx", usuarios);
-                System.out.println(stream);
-                System.out.println("byte" + IOUtils.toByteArray(stream));
-	        
-                String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));                
-                String filename = "usuarios_" + currentDate + ".xlsx";
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String filename = "animais_" + currentDate + ".xlsx";
 
-	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
-	                .contentType(MediaType.APPLICATION_JSON)
-	                .body(IOUtils.toByteArray(stream));
-	    }
-		*/
-	}
+        byte[] excelData = stream.toByteArray();
+        String base64Encoded = Base64.getEncoder().encodeToString(excelData);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("filename", filename);
+        response.put("content", base64Encoded);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @GetMapping("/export/usuarios")
+    public ResponseEntity<Map<String, String>> exportUsuarioToCsv() {
+        List<UsuarioFindAllDTO> usuarios = usuarioService.fetchUsuarioList();
+        ByteArrayOutputStream stream = excelService.criarArquivoExcelUsuario("usuarios.xls", usuarios);
+
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String filename = "usuarios_" + currentDate + ".xlsx";
+
+        byte[] excelData = stream.toByteArray();
+        String base64Encoded = Base64.getEncoder().encodeToString(excelData);
+
+        // Create a JSON payload containing the Base64 data
+        Map<String, String> response = new HashMap<>();
+        response.put("filename", filename);
+        response.put("content", base64Encoded);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+}
