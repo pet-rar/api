@@ -3,8 +3,7 @@ package com.project.pet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -87,7 +86,6 @@ public class ExcelController {
         byte[] excelData = stream.toByteArray();
         String base64Encoded = Base64.getEncoder().encodeToString(excelData);
 
-        // Create a JSON payload containing the Base64 data
         Map<String, String> response = new HashMap<>();
         response.put("filename", filename);
         response.put("content", base64Encoded);
