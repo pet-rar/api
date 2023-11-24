@@ -1,9 +1,8 @@
 package com.project.pet.service;
 
 import java.awt.Color;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -26,22 +25,20 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.project.pet.dto.Vacinacao.CarterinhaDTO;
 import com.project.pet.repository.VacinacaoRepository;
 
-import jakarta.servlet.http.HttpServletResponse;
-
 @Service
 public class PDFGeneratorService {
 
     @Autowired
     private VacinacaoRepository vacinacaoRepository;
 
-
-    public void export(HttpServletResponse response, Long id) throws IOException, DocumentException {
+    public ByteArrayOutputStream export(Long id) throws IOException, DocumentException {
         List<CarterinhaDTO> carterinhas = vacinacaoRepository.findCarterinhaVacinacao(id);
 
         if (carterinhas != null && !carterinhas.isEmpty()) {
             // Configuração do documento
             Document document = new Document(PageSize.A4, 50, 50, 50, 50);
-            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PdfWriter writer = PdfWriter.getInstance(document, outputStream);
             document.addTitle("Carterinha de Vacinação");
             document.open();
 
@@ -84,11 +81,14 @@ public class PDFGeneratorService {
                 addCell(table, "Data Vacinação", formatDate(carterinha.data_vacinacao()));
 
                 document.add(table);
+                document.newPage();  // Adiciona uma nova página para cada elemento
             }
 
-            document.close();
+            document.close();  // Fecha o documento após adicionar todas as páginas
+            return outputStream;
         }
-        
+
+        return null;
     }
 
     private String formatDate(LocalDateTime dateTime) {
